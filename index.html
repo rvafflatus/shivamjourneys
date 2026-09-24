@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivam Journeys | Explore Your Dream Destinations</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for professional travel icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        accent: {
+                            500: '#f59e0b',
+                            600: '#d97706',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased">
+
+    <!-- Top Contact Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs sm:text-sm py-2.5 px-4 sm:px-8 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-6">
+                <a href="tel:9561029349" class="hover:text-accent-500 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-phone text-accent-500"></i> +91 9561029349
+                </a>
+                <a href="mailto:vinodkumarlohar@gmail.com" class="hover:text-accent-500 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-envelope text-accent-500"></i> vinodkumarlohar@gmail.com
+                </a>
+            </div>
+            <div class="flex items-center gap-4 text-slate-400">
+                <span><i class="fa-solid fa-clock text-accent-500 mr-1"></i> Mon - Sun: 9:00 AM - 8:00 PM</span>
+                <div class="flex items-center gap-3 ml-2">
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex justify-between items-center">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-2.5 group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-700 to-brand-600 flex items-center justify-center text-white shadow-md shadow-brand-600/30 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-plane-departure text-lg"></i>
+                </div>
+                <div>
+                    <span class="text-xl sm:text-2xl font-extrabold tracking-tight text-slate-900">Shivam<span class="text-brand-600">Journeys</span></span>
+                    <span class="block text-[10px] uppercase tracking-widest text-slate-500 font-medium">Explore The World</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Menu -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-700 text-sm">
+                <a href="#home" class="text-brand-600 font-semibold hover:text-brand-700 transition-colors">Home</a>
+                <a href="#domestic" class="hover:text-brand-600 transition-colors">Domestic Tours</a>
+                <a href="#international" class="hover:text-brand-600 transition-colors">International Tours</a>
+                <a href="#packages" class="hover:text-brand-600 transition-colors">Packages</a>
+                <a href="#about" class="hover:text-brand-600 transition-colors">About Us</a>
+                <a href="#contact" class="hover:text-brand-600 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Call to Action Button -->
+            <div class="hidden md:flex items-center gap-3">
+                <a href="#contact" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md shadow-brand-600/20 transition-all hover:shadow-lg hover:-translate-y-0.5">
+                    <i class="fa-solid fa-headset mr-2"></i> Enquire Now
+                </a>
+            </div>
+
+            <!-- Mobile Menu Toggle Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-700 focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition-colors">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3 shadow-lg">
+            <a href="#home" class="block text-brand-600 font-semibold py-2">Home</a>
+            <a href="#domestic" class="block text-slate-700 hover:text-brand-600 py-2">Domestic Tours</a>
+            <a href="#international" class="block text-slate-700 hover:text-brand-600 py-2">International Tours</a>
+            <a href="#packages" class="block text-slate-700 hover:text-brand-600 py-2">Packages</a>
+            <a href="#about" class="block text-slate-700 hover:text-brand-600 py-2">About Us</a>
+            <a href="#contact" class="block text-slate-700 hover:text-brand-600 py-2">Contact</a>
+            <div class="pt-2">
+                <a href="#contact" class="block text-center w-full bg-brand-600 text-white py-2.5 rounded-xl font-semibold text-sm shadow">
+                    Enquire Now
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-slate-900 text-white min-h-[580px] flex items-center justify-center overflow-hidden">
+        <!-- Background Overlay Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2000&q=80" alt="Travel Destination" class="w-full h-full object-cover object-center opacity-40 scale-105 animate-pulse duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
+            <span class="inline-flex items-center gap-2 bg-brand-600/30 border border-brand-500/40 text-brand-300 text-xs sm:text-sm font-medium px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
+                <i class="fa-solid fa-award"></i> Premier Holiday Planners & Tour Operators
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Discover Amazing Places With <span class="text-brand-400">Shivam Journeys</span>
+            </h1>
+            <p class="text-slate-300 text-base sm:text-xl max-w-2xl mx-auto mb-10 font-light">
+                Unforgettable domestic and international holiday packages tailored for comfort, adventure, and memories that last a lifetime.
+            </p>
+
+            <!-- Quick Search Bar Box -->
+            <div class="bg-white/95 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-2xl max-w-4xl mx-auto text-slate-800">
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Where to?</label>
+                        <div class="flex items-center bg-slate-100 rounded-xl px-3.5 py-2.5">
+                            <i class="fa-solid fa-location-dot text-brand-600 mr-2.5"></i>
+                            <input type="text" placeholder="Kashmir, Goa, Bali..." class="bg-transparent w-full text-sm focus:outline-none text-slate-800">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Travel Type</label>
+                        <div class="flex items-center bg-slate-100 rounded-xl px-3.5 py-2.5">
+                            <i class="fa-solid fa-suitcase-rolling text-brand-600 mr-2.5"></i>
+                            <select class="bg-transparent w-full text-sm focus:outline-none text-slate-800 cursor-pointer">
+                                <option>Domestic Tour</option>
+                                <option>International Tour</option>
+                                <option>Luxury Honeymoon</option>
+                                <option>Family Holiday</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="flex items-end">
+                        <a href="#packages" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3 px-6 rounded-xl text-sm transition-all shadow-md shadow-brand-600/30 flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-magnifying-glass"></i> Search Tours
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Stats -->
+    <section class="bg-white py-12 border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="p-4">
+                <div class="text-3xl sm:text-4xl font-extrabold text-brand-600 mb-1">500+</div>
+                <div class="text-slate-500 text-sm font-medium">Happy Travelers</div>
+            </div>
+            <div class="p-4">
+                <div class="text-3xl sm:text-4xl font-extrabold text-brand-600 mb-1">50+</div>
+                <div class="text-slate-500 text-sm font-medium">Destinations Covered</div>
+            </div>
+            <div class="p-4">
+                <div class="text-3xl sm:text-4xl font-extrabold text-brand-600 mb-1">100%</div>
+                <div class="text-slate-500 text-sm font-medium">Customized Itineraries</div>
+            </div>
+            <div class="p-4">
+                <div class="text-3xl sm:text-4xl font-extrabold text-brand-600 mb-1">24/7</div>
+                <div class="text-slate-500 text-sm font-medium">Customer Support</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Domestic Tours Section -->
+    <section id="domestic" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+                <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider bg-brand-50 px-3 py-1 rounded-full">Explore Incredible India</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Popular Domestic Tours</h2>
+            </div>
+            <p class="text-slate-500 text-sm max-w-md mt-3 md:mt-0">
+                Experience the diverse landscapes, rich culture, and royal heritage of India with our carefully planned domestic holiday packages.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Kashmir Card -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group flex flex-col">
+                <div class="relative h-60 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1595815771614-ade9d652a65d?auto=format&fit=crop&w=800&q=80" alt="Kashmir" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow">5 Days / 4 Nights</span>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex items-center text-xs text-amber-500 font-semibold mb-2">
+                        <i class="fa-solid fa-star mr-1"></i> 4.9 (120+ reviews)
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Heavenly Kashmir Tour</h3>
+                    <p class="text-slate-500 text-sm mb-6 flex-grow">Explore Srinagar Dal Lake, Gulmarg snow peaks, and Pahalgam valleys.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Starting from</span>
+                            <span class="text-lg font-extrabold text-brand-600">₹24,999</span>
+                        </div>
+                        <a href="#contact" class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Goa Card -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group flex flex-col">
+                <div class="relative h-60 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80" alt="Goa" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow">4 Days / 3 Nights</span>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex items-center text-xs text-amber-500 font-semibold mb-2">
+                        <i class="fa-solid fa-star mr-1"></i> 4.8 (95+ reviews)
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Sun & Sand Goa Getaway</h3>
+                    <p class="text-slate-500 text-sm mb-6 flex-grow">Enjoy pristine beaches, vibrant nightlife, water sports, and heritage churches.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Starting from</span>
+                            <span class="text-lg font-extrabold text-brand-600">₹16,999</span>
+                        </div>
+                        <a href="#contact" class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kerala Card -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group flex flex-col">
+                <div class="relative h-60 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80" alt="Kerala" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow">6 Days / 5 Nights</span>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex items-center text-xs text-amber-500 font-semibold mb-2">
+                        <i class="fa-solid fa-star mr-1"></i> 4.9 (140+ reviews)
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">God's Own Country Kerala</h3>
+                    <p class="text-slate-500 text-sm mb-6 flex-grow">Experience Munnar tea gardens, Alleppey backwater houseboat stay, and Kovalam.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Starting from</span>
+                            <span class="text-lg font-extrabold text-brand-600">₹28,999</span>
+                        </div>
+                        <a href="#contact" class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">Book Now</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rajasthan Card -->
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 group flex flex-col">
+                <div class="relative h-60 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1599661046289-e31898f46a41?auto=format&fit=crop&w=800&q=80" alt="Rajasthan" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <span class="absolute top-4 right-4 bg-white/90 backdrop-blur-sm text-slate-900 text-xs font-bold px-3 py-1 rounded-full shadow">6 Days / 5 Nights</span>
+                </div>
+                <div class="p-6 flex flex-col flex-grow">
+                    <div class="flex items-center text-xs text-amber-500 font-semibold mb-2">
+                        <i class="fa-solid fa-star mr-1"></i> 5.0 (180+ reviews)
+                    </div>
+                    <h3 class="text-xl font-bold text-slate-900 mb-2">Royal Rajasthan Heritage</h3>
+                    <p class="text-slate-500 text-sm mb-6 flex-grow">Discover majestic forts and palaces in Jaipur, Udaipur, and Jaisalmer desert safari.</p>
+                    <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Starting from</span>
+                            <span class="text-lg font-extrabold text-brand-600">₹22,999</span>
+                        </div>
+                        <a href="#contact" class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- International Tours Section -->
+    <section id="international" class="py-20 bg-slate-100 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+                <div>
+                    <span class="text-accent-600 font-semibold text-sm uppercase tracking-wider bg-amber-50 px-3 py-1 rounded-full">Global Destinations</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">International Holiday Packages</h2>
+                </div>
+                <p class="text-slate-500 text-sm max-w-md mt-3 md:mt-0">
+                    Take your travel dreams abroad with our premium international packages featuring seamless visa assistance and luxury stays.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Thailand -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 group flex flex-col">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?auto=format&fit=crop&w=800&q=80" alt="Thailand" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-accent-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Most Popular</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center text-xs text-amber-500 font-semibold mb-2">
+                            <i class="fa-solid fa-star mr-1"></i> 4.9 (210+ reviews)
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Amazing Thailand (Bangkok & Pattaya)</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow">Includes coral island tour, Alcazar show, luxury hotel accommodations, and transfers.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Starting from</span>
+                                <span class="text-lg font-extrabold text-brand-600">₹34,999</span>
+                            </div>
+                            <a href="#contact" class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Vietnam -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 group flex flex-col">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1528127269322-539801943592?auto=format&fit=crop&w=800&q=80" alt="Vietnam" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-slate-900/80 backdrop-blur-sm text-white text-xs font-bold px-3 py-1 rounded-full shadow">6 Days / 5 Nights</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center text-xs text-amber-500 font-semibold mb-2">
+                            <i class="fa-solid fa-star mr-1"></i> 4.8 (85+ reviews)
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Vibrant Vietnam (Hanoi & Da Nang)</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow">Ha Long Bay cruise, Golden Bridge Ba Na Hills, and vibrant street food experiences.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Starting from</span>
+                                <span class="text-lg font-extrabold text-brand-600">₹42,999</span>
+                            </div>
+                            <a href="#contact" class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bali -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-200 group flex flex-col">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80" alt="Bali" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-rose-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow">Honeymoon Special</span>
+                    </div>
+                    <div class="p-6 flex flex-col flex-grow">
+                        <div class="flex items-center text-xs text-amber-500 font-semibold mb-2">
+                            <i class="fa-solid fa-star mr-1"></i> 5.0 (150+ reviews)
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 mb-2">Romantic Bali Escape</h3>
+                        <p class="text-slate-500 text-sm mb-6 flex-grow">Private pool villa stay in Ubud, Tanah Lot temple sunset, and Nusa Penida island tour.</p>
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-100">
+                            <div>
+                                <span class="text-xs text-slate-400 block">Starting from</span>
+                                <span class="text-lg font-extrabold text-brand-600">₹48,999</span>
+                            </div>
+                            <a href="#contact" class="bg-brand-50 hover:bg-brand-600 text-brand-700 hover:text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section id="about" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider bg-brand-50 px-3 py-1 rounded-full">Our Core Values</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Why Choose Shivam Journeys?</h2>
+            <p class="text-slate-500 text-sm mt-3">We are dedicated to turning your travel aspirations into seamless, comfortable, and luxurious realities.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center hover:shadow-lg transition-shadow">
+                <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                    <i class="fa-solid fa-handshake-angle"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Trusted Experts</h3>
+                <p class="text-slate-500 text-sm">Professional travel consultants with extensive firsthand destination knowledge.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center hover:shadow-lg transition-shadow">
+                <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                    <i class="fa-solid fa-tag"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Best Price Guarantee</h3>
+                <p class="text-slate-500 text-sm">Transparent pricing with no hidden charges and unmatched luxury partner deals.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center hover:shadow-lg transition-shadow">
+                <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">24/7 Support</h3>
+                <p class="text-slate-500 text-sm">Round-the-clock assistance throughout your journey for complete peace of mind.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 text-center hover:shadow-lg transition-shadow">
+                <div class="w-14 h-14 bg-brand-50 text-brand-600 rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                    <i class="fa-solid fa-shield-heart"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-2">Safe & Secure</h3>
+                <p class="text-slate-500 text-sm">Verified hotels, sanitized private cabs, and safe itineraries curated for families.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Inquiry Section -->
+    <section id="contact" class="py-20 bg-slate-900 text-white px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider bg-brand-950 px-3 py-1 rounded-full border border-brand-800">Get In Touch</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold mt-3 mb-6">Plan Your Next Trip With Us Today!</h2>
+                <p class="text-slate-300 text-base mb-8">
+                    Have questions about a destination or want a custom holiday itinerary? Contact our travel experts directly or fill out the enquiry form.
+                </p>
+
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-800 text-brand-400 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 text-xs block">Call Us Anytime</span>
+                            <a href="tel:9561029349" class="text-lg font-bold hover:text-brand-400 transition-colors">+91 9561029349</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-800 text-brand-400 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 text-xs block">Email Address</span>
+                            <a href="mailto:vinodkumarlohar@gmail.com" class="text-lg font-bold hover:text-brand-400 transition-colors">vinodkumarlohar@gmail.com</a>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-800 text-brand-400 rounded-xl flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <span class="text-slate-400 text-xs block">Office Location</span>
+                            <span class="text-lg font-bold">India (Serving Pan-India Travelers)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Inquiry Form -->
+            <div class="bg-white text-slate-800 p-8 sm:p-10 rounded-3xl shadow-2xl">
+                <h3 class="text-2xl font-bold mb-6 text-slate-900">Send Travel Enquiry</h3>
+                <form id="inquiry-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Your Full Name</label>
+                        <input type="text" id="name" required placeholder="Vinod Lohar" class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600">
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Phone Number</label>
+                            <input type="tel" id="phone" required placeholder="9561029349" class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Email Address</label>
+                            <input type="email" id="email" required placeholder="vinodkumarlohar@gmail.com" class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600">
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Destination</label>
+                            <input type="text" id="destination" required placeholder="Kashmir / Thailand / Bali" class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Travel Date</label>
+                            <input type="date" id="date" required class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Message / Requirements</label>
+                        <textarea rows="3" id="message" placeholder="Number of travelers, hotel preference, etc." class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600"></textarea>
+                    </div>
+                    <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-semibold py-3.5 rounded-xl text-sm transition-all shadow-md shadow-brand-600/30">
+                        Submit Enquiry
+                    </button>
+                    <div id="success-message" class="hidden text-center bg-emerald-50 text-emerald-700 border border-emerald-200 p-3 rounded-xl text-sm font-medium">
+                        <i class="fa-solid fa-circle-check mr-2"></i> Thank you! We will get in touch with you shortly.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-12 px-4 sm:px-8 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+            <div>
+                <div class="flex items-center gap-2.5 mb-4">
+                    <div class="w-8 h-8 rounded-lg bg-brand-600 flex items-center justify-center text-white font-bold">
+                        <i class="fa-solid fa-plane-departure text-sm"></i>
+                    </div>
+                    <span class="text-xl font-bold text-white">Shivam<span class="text-brand-500">Journeys</span></span>
+                </div>
+                <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                    Your premier holiday planner and travel partner. Creating unforgettable domestic and international travel experiences.
+                </p>
+                <div class="flex items-center gap-3">
+                    <a href="#" class="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-brand-600 transition-colors"><i class="fa-brands fa-facebook-f text-xs"></i></a>
+                    <a href="#" class="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-brand-600 transition-colors"><i class="fa-brands fa-instagram text-xs"></i></a>
+                    <a href="#" class="w-8 h-8 bg-slate-900 rounded-full flex items-center justify-center text-white hover:bg-brand-600 transition-colors"><i class="fa-brands fa-whatsapp text-xs"></i></a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-4">Domestic Tours</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#domestic" class="hover:text-white transition-colors">Kashmir Tour Packages</a></li>
+                    <li><a href="#domestic" class="hover:text-white transition-colors">Goa Beach Holidays</a></li>
+                    <li><a href="#domestic" class="hover:text-white transition-colors">Kerala Backwaters</a></li>
+                    <li><a href="#domestic" class="hover:text-white transition-colors">Royal Rajasthan Heritage</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-4">International Tours</h4>
+                <ul class="space-y-2 text-xs">
+                    <li><a href="#international" class="hover:text-white transition-colors">Amazing Thailand Holidays</a></li>
+                    <li><a href="#international" class="hover:text-white transition-colors">Vibrant Vietnam Packages</a></li>
+                    <li><a href="#international" class="hover:text-white transition-colors">Romantic Bali Getaways</a></li>
+                    <li><a href="#international" class="hover:text-white transition-colors">Dubai Luxury Tours</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-4">Contact Info</h4>
+                <ul class="space-y-3 text-xs">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-phone text-brand-500"></i> +91 9561029349</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-envelope text-brand-500"></i> vinodkumarlohar@gmail.com</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-location-dot text-brand-500"></i> India</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto pt-8 border-t border-slate-900 text-center text-xs text-slate-500">
+            <p>&copy; <span id="current-year"></span> Shivam Journeys. All rights reserved. Designed for shivamjourneys.com</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Set current year in footer
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // Form submission handler
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const successMsg = document.getElementById('success-message');
+            successMsg.classList.remove('hidden');
+            document.getElementById('inquiry-form').reset();
+            setTimeout(() => {
+                successMsg.classList.add('hidden');
+            }, 6000);
+        }
+    </script>
+</body>
+</html>
