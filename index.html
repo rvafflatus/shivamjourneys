@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shivam Journeys | Explore Your Dream Destinations</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for professional travel icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
     <script>
@@ -22,75 +24,199 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <!-- Header Component -->
-    <div id="include-header"></div>
+    <!-- Top Contact Bar -->
+    <div class="bg-slate-900 text-slate-300 text-xs sm:text-sm py-2.5 px-4 sm:px-8 border-b border-slate-800">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <div class="flex items-center gap-6">
+                <a href="tel:9561029349" class="hover:text-accent-500 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-phone text-accent-500"></i> +91 9561029349 / 9549429349
+                </a>
+                <a href="mailto:journeys.shivam@gmail.com" class="hover:text-accent-500 transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-envelope text-accent-500"></i> journeys.shivam@gmail.com
+                </a>
+            </div>
+            <div class="flex items-center gap-4 text-slate-400">
+                <span><i class="fa-solid fa-clock text-accent-500 mr-1"></i> Mon - Sun: 9:00 AM - 8:00 PM</span>
+                <div class="flex items-center gap-3 ml-2">
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- Hero Component -->
-    <div id="include-hero"></div>
+    <!-- Navigation Bar with Logo -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-slate-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-3.5 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-2.5 group">
+                <img src="assets/logo.png" alt="Shivam Journeys Logo" class="h-12 sm:h-14 w-auto object-contain group-hover:scale-105 transition-transform">
+            </a>
 
-    <!-- Stats Component -->
-    <div id="include-stats"></div>
+            <nav class="hidden md:flex items-center gap-8 font-medium text-slate-700 text-sm">
+                <a href="#home" class="text-brand-600 font-semibold hover:text-brand-700 transition-colors">Home</a>
+                <a href="#domestic" class="hover:text-brand-600 transition-colors">Domestic Tours</a>
+                <a href="#international" class="hover:text-brand-600 transition-colors">International Tours</a>
+                <a href="#about" class="hover:text-brand-600 transition-colors">About Us</a>
+                <a href="#contact" class="hover:text-brand-600 transition-colors">Contact</a>
+            </nav>
 
-    <!-- Domestic Tours Component -->
-    <div id="include-domestic"></div>
+            <div class="hidden md:flex items-center gap-3">
+                <a href="#contact" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl font-semibold text-sm shadow-md shadow-brand-600/20 transition-all hover:shadow-lg hover:-translate-y-0.5">
+                    <i class="fa-solid fa-headset mr-2"></i> Enquire Now
+                </a>
+            </div>
 
-    <!-- International Tours Component -->
-    <div id="include-international"></div>
+            <button id="mobile-menu-btn" class="md:hidden text-slate-700 focus:outline-none p-2 rounded-lg hover:bg-slate-100 transition-colors">
+                <i class="fa-solid fa-bars text-xl"></i>
+            </button>
+        </div>
 
-    <!-- About Component -->
-    <div id="include-about"></div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-6 py-4 space-y-3 shadow-lg">
+            <a href="#home" class="block text-brand-600 font-semibold py-2">Home</a>
+            <a href="#domestic" class="block text-slate-700 hover:text-brand-600 py-2">Domestic Tours</a>
+            <a href="#international" class="block text-slate-700 hover:text-brand-600 py-2">International Tours</a>
+            <a href="#about" class="block text-slate-700 hover:text-brand-600 py-2">About Us</a>
+            <a href="#contact" class="block text-slate-700 hover:text-brand-600 py-2">Contact</a>
+            <div class="pt-2">
+                <a href="#contact" class="block text-center w-full bg-brand-600 text-white py-2.5 rounded-xl font-semibold text-sm shadow">
+                    Enquire Now
+                </a>
+            </div>
+        </div>
+    </header>
 
-    <!-- Contact Component -->
-    <div id="include-contact"></div>
+    <!-- Hero Section -->
+    <section id="home" class="relative bg-slate-900 text-white min-h-[580px] flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2000&q=80" alt="Travel Destination" class="w-full h-full object-cover object-center opacity-40 scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
+        </div>
 
-    <!-- Footer Component -->
-    <div id="include-footer"></div>
+        <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
+            <span class="inline-flex items-center gap-2 bg-brand-600/30 border border-brand-500/40 text-brand-300 text-xs sm:text-sm font-medium px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
+                <i class="fa-solid fa-award"></i> Premier Holiday Planners & Tour Operators
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Discover Amazing Places With <span class="text-brand-400">Shivam Journeys</span>
+            </h1>
+            <p class="text-slate-300 text-base sm:text-xl max-w-2xl mx-auto mb-10 font-light">
+                Unforgettable domestic and international holiday packages tailored for comfort, adventure, and memories that last a lifetime.
+            </p>
+        </div>
+    </section>
 
-    <!-- Script to Load Components Dynamically -->
-    <script>
-        async function loadComponent(id, file) {
-            try {
-                let response = await fetch(file);
-                if (response.ok) {
-                    let html = await response.text();
-                    document.getElementById(id).innerHTML = html;
-                }
-            } catch (error) {
-                console.error("Error loading component:", file, error);
-            }
-        }
+    <!-- Domestic Tours Section -->
+    <section id="domestic" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+        <div class="text-center mb-12">
+            <span class="text-brand-600 font-semibold text-sm uppercase tracking-wider bg-brand-50 px-3 py-1 rounded-full">Explore Incredible India</span>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-2">Popular Domestic Tours</h2>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 p-6">
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Heavenly Kashmir Tour</h3>
+                <p class="text-slate-500 text-sm mb-4">Srinagar, Gulmarg, Pahalgam valleys.</p>
+                <span class="text-lg font-extrabold text-brand-600">₹24,999</span>
+            </div>
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 p-6">
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Sun & Sand Goa</h3>
+                <p class="text-slate-500 text-sm mb-4">Beaches, nightlife, and water sports.</p>
+                <span class="text-lg font-extrabold text-brand-600">₹16,999</span>
+            </div>
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 p-6">
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Kerala Backwaters</h3>
+                <p class="text-slate-500 text-sm mb-4">Munnar tea gardens & Houseboat.</p>
+                <span class="text-lg font-extrabold text-brand-600">₹28,999</span>
+            </div>
+            <div class="bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100 p-6">
+                <h3 class="text-xl font-bold text-slate-900 mb-2">Royal Rajasthan</h3>
+                <p class="text-slate-500 text-sm mb-4">Jaipur, Udaipur & Desert Safari.</p>
+                <span class="text-lg font-extrabold text-brand-600">₹22,999</span>
+            </div>
+        </div>
+    </section>
 
-        window.addEventListener('DOMContentLoaded', async () => {
-            await loadComponent('include-header', 'components/header.html');
-            await loadComponent('include-hero', 'components/hero.html');
-            await loadComponent('include-stats', 'components/stats.html');
-            await loadComponent('include-domestic', 'components/domestic.html');
-            await loadComponent('include-international', 'components/international.html');
-            await loadComponent('include-about', 'components/about.html');
-            await loadComponent('include-contact', 'components/contact.html');
-            await loadComponent('include-footer', 'components/footer.html');
+    <!-- Contact Section with Updated Address -->
+    <section id="contact" class="py-20 bg-slate-900 text-white px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="text-brand-400 font-semibold text-sm uppercase tracking-wider bg-brand-950 px-3 py-1 rounded-full border border-brand-800">Get In Touch</span>
+                <h2 class="text-3xl sm:text-5xl font-extrabold mt-3 mb-6">Plan Your Next Trip With Us Today!</h2>
+                <p class="text-slate-300 text-base mb-8">
+                    Have questions about a destination or want a custom holiday itinerary? Contact our travel experts directly or visit our office.
+                </p>
 
-            // Re-bind mobile menu button after components load
-            setTimeout(() => {
-                const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-                const mobileMenu = document.getElementById('mobile-menu');
-                if (mobileMenuBtn && mobileMenu) {
-                    mobileMenuBtn.addEventListener('click', () => {
-                        mobileMenu.classList.toggle('hidden');
-                    });
-                    mobileMenu.querySelectorAll('a').forEach(link => {
-                        link.addEventListener('click', () => {
-                            mobileMenu.classList.add('hidden');
-                        });
-                    });
-                }
-                const yearElement = document.getElementById('current-year');
-                if (yearElement) {
-                    yearElement.textContent = new Date().getFullYear();
-                }
-            }, 300);
-        });
-    </script>
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-800 text-brand-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <span class="text-slate-400 text-xs block">Call Us Anytime</span>
+                            <a href="tel:9561029349" class="text-lg font-bold hover:text-brand-400 transition-colors">+91 9561029349 / 9549429349</a>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-slate-800 text-brand-400 rounded-xl flex items-center justify-center text-xl"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <span class="text-slate-400 text-xs block">Email Address</span>
+                            <a href="mailto:journeys.shivam@gmail.com" class="text-lg font-bold hover:text-brand-400 transition-colors">journeys.shivam@gmail.com</a>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-slate-800 text-brand-400 rounded-xl flex items-center justify-center text-xl mt-1"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <span class="text-slate-400 text-xs block">Office Address</span>
+                            <span class="text-base font-bold leading-relaxed">1st Floor, Diamond Plaza, Sector - 5, Opp. Chaudhary Hospital, Hiran Magri, Udaipur - 313002, Rajasthan</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white text-slate-800 p-8 sm:p-10 rounded-3xl shadow-2xl">
+                <h3 class="text-2xl font-bold mb-6 text-slate-900">Send Travel Enquiry</h3>
+                <form id="inquiry-form" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Your Full Name</label>
+                        <input type="text" id="name" required placeholder="Vinod Lohar" class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Phone Number</label>
+                        <input type="tel" id="phone" required placeholder="9561029349" class="w-full bg-slate-100 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none">
+                    </div>
+                    <button type="submit" class="w-full bg-brand-600 text-white font-semibold py-3.5 rounded-xl text-sm">Submit Enquiry</button>
+                    <div id="success-message" class="hidden text-center bg-emerald-50 text-emerald-700 p-3 rounded-xl text-sm font-medium">
+                        <i class="fa-solid fa-circle-check mr-2"></i> Thank you! We will get in touch shortly.
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 text-slate-400 py-10 px-4 sm:px-8 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-xs">
+            <div>
+                <div class="flex items-center gap-2.5 mb-4">
+                    <img src="assets/logo.png" alt="Logo" class="h-8 w-auto object-contain">
+                    <span class="text-lg font-bold text-white">Shivam Journeys</span>
+                </div>
+                <p class="text-slate-400">Your premier holiday planner and travel partner in Udaipur.</p>
+            </div>
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-3">Office Location</h4>
+                <p class="text-slate-300 leading-relaxed"><i class="fa-solid fa-location-dot text-brand-500 mr-1.5"></i> 1st Floor, Diamond Plaza, Sector - 5, Opp. Chaudhary Hospital, Hiran Magri, Udaipur - 313002, Rajasthan</p>
+            </div>
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-3">Contact Info</h4>
+                <p class="text-slate-300 mb-1"><i class="fa-solid fa-phone text-brand-500 mr-1.5"></i> +91 9561029349 / 9549429349</p>
+                <p class="text-slate-300"><i class="fa-solid fa-envelope text-brand-500 mr-1.5"></i> journeys.shivam@gmail.com</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-6 border-t border-slate-900 text-center text-xs text-slate-500">
+            <p>&copy; <span id="current-year"></span> Shivam Journeys. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- External JS File -->
     <script src="js/main.js"></script>
 </body>
 </html>
