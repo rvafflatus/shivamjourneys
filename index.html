@@ -8,8 +8,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- FontAwesome for professional travel icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Custom Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
     <script>
         tailwind.config = {
             theme: {
@@ -27,9 +27,6 @@
                             500: '#f59e0b',
                             600: '#d97706',
                         }
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
                     }
                 }
             }
@@ -115,13 +112,11 @@
 
     <!-- Hero Section -->
     <section id="home" class="relative bg-slate-900 text-white min-h-[580px] flex items-center justify-center overflow-hidden">
-        <!-- Background Overlay Image -->
         <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2000&q=80" alt="Travel Destination" class="w-full h-full object-cover object-center opacity-40 scale-105 animate-pulse duration-1000">
+            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=2000&q=80" alt="Travel Destination" class="w-full h-full object-cover object-center opacity-40 scale-105">
             <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/60 to-transparent"></div>
         </div>
 
-        <!-- Hero Content -->
         <div class="relative z-10 max-w-5xl mx-auto px-4 text-center py-20">
             <span class="inline-flex items-center gap-2 bg-brand-600/30 border border-brand-500/40 text-brand-300 text-xs sm:text-sm font-medium px-4 py-1.5 rounded-full mb-6 backdrop-blur-sm">
                 <i class="fa-solid fa-award"></i> Premier Holiday Planners & Tour Operators
@@ -133,7 +128,6 @@
                 Unforgettable domestic and international holiday packages tailored for comfort, adventure, and memories that last a lifetime.
             </p>
 
-            <!-- Quick Search Bar Box -->
             <div class="bg-white/95 backdrop-blur-md p-4 sm:p-6 rounded-2xl shadow-2xl max-w-4xl mx-auto text-slate-800">
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-left">
                     <div>
@@ -557,35 +551,7 @@
         </div>
     </footer>
 
-    <script>
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Close mobile menu when clicking a link
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.add('hidden');
-            });
-        });
-
-        // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // Form submission handler
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            const successMsg = document.getElementById('success-message');
-            successMsg.classList.remove('hidden');
-            document.getElementById('inquiry-form').reset();
-            setTimeout(() => {
-                successMsg.classList.add('hidden');
-            }, 6000);
-        }
-    </script>
+    <!-- Linked External JavaScript File -->
+    <script src="js/main.js"></script>
 </body>
 </html>
