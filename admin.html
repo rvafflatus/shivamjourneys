@@ -94,7 +94,7 @@
                     <input type="text" id="inv-client" value="Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm" oninput="updatePreview()">
                 </div>
 
-                <!-- Line Items Section with Manual Description -->
+                <!-- Multiple Line Items & Description Section -->
                 <div class="space-y-4 pt-2 border-t">
                     <div class="flex justify-between items-center">
                         <label class="block text-xs font-bold text-slate-700 uppercase">Invoice Line Items</label>
@@ -201,7 +201,7 @@
 
         let services = [];
         let lineItems = [
-            { serviceIdx: 0, desc: "3 Pax Dubai Tour Package with Flight & Hotel", amount: 34500, taxRate: 18 }
+            { serviceIdx: 0, desc: "3 Pax Tour Package with Flight & Hotel", amount: 34500, taxRate: 18 }
         ];
         let grandTotalValue = 0;
 
