@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Invoicing & Accounting | Shivam Journeys</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @media print {
+            body * { visibility: hidden; }
+            #invoice-printable, #invoice-printable * { visibility: visible; }
+            #invoice-printable { position: absolute; left: 0; top: 0; width: 100%; border: none !important; box-shadow: none !important; }
+            .no-print { display: none !important; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 font-sans antialiased min-h-screen p-4 sm:p-8">
+
+    <div class="max-w-6xl mx-auto space-y-8">
+        
+        <!-- Header Controls -->
+        <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4 no-print">
+            <div>
+                <h1 class="text-2xl font-extrabold text-slate-900">Shivam Journeys Admin Panel</h1>
+                <p class="text-slate-500 text-sm">Invoicing connected live with Google Sheets.</p>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="switchTab('generator')" id="btn-generator" class="bg-emerald-600 text-white px-4 py-2 rounded-xl font-semibold text-sm shadow">Create Invoice</button>
+                <button onclick="switchTab('settings')" id="btn-settings" class="bg-slate-200 text-slate-700 hover:bg-slate-300 px-4 py-2 rounded-xl font-semibold text-sm transition-colors">Manage Services</button>
+                <a href="index.html" class="bg-slate-800 text-white px-4 py-2 rounded-xl font-semibold text-sm">Back to Site</a>
+            </div>
+        </div>
+
+        <!-- TAB 1: SERVICE SETTINGS -->
+        <div id="tab-settings" class="hidden bg-white p-6 sm:p-8 rounded-2xl shadow-sm space-y-6 no-print">
+            <h2 class="text-xl font-bold text-slate-900">Add Service to Google Sheet</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Service / Item Name</label>
+                    <input type="text" id="new-service-name" placeholder="e.g. Dubai Tour" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">HSN / SAC Code</label>
+                    <input type="text" id="new-service-hsn" placeholder="e.g. 998552" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
+                </div>
+                <div class="flex items-end">
+                    <button onclick="addCustomService()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors">Save to Sheet</button>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-sm font-bold text-slate-700 uppercase tracking-wider mb-3">Live Services from Google Sheet</h3>
+                <div id="services-list-container" class="divide-y divide-slate-100 border border-slate-100 rounded-xl p-4 bg-slate-50 max-h-60 overflow-y-auto">
+                    Loading from Google Sheet...
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: INVOICE GENERATOR -->
+        <div id="tab-generator" class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-white p-6 rounded-2xl shadow-sm space-y-6 no-print lg:col-span-1">
+                <h2 class="text-lg font-bold text-slate-900 border-b pb-3">Invoice Builder</h2>
+                
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Invoice Type</label>
+                    <select id="inv-type" onchange="toggleInvoiceType()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
+                        <option value="customer">Customer Tax Invoice</option>
+                        <option value="commission">B2B Commission Invoice</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Invoice No.</label>
+                        <input type="text" id="inv-no" value="SJ/2026/001" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm" oninput="updatePreview()">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Date</label>
+                        <input type="date" id="inv-date" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm" oninput="updatePreview()">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1" id="lbl-client">Client / Billed To Name</label>
+                    <input type="text" id="inv-client" value="Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm" oninput="updatePreview()">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Select Service</label>
+                    <select id="inv-service" onchange="updatePreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm">
+                        <option>Loading...</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Amount (₹)</label>
+                        <input type="number" id="inv-amount" value="34500" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm" oninput="updatePreview()">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Tax Rate (%)</label>
+                        <select id="inv-taxrate" onchange="updatePreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm">
+                            <option value="0">0% (Exempt)</option>
+                            <option value="5">5%</option>
+                            <option value="12">12%</option>
+                            <option value="18" selected>18%</option>
+                            <option value="28">28%</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Already Received / Advance (₹)</label>
+                    <input type="number" id="inv-received" value="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm" oninput="updatePreview()">
+                </div>
+
+                <button onclick="window.print()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 rounded-xl text-sm transition-all shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-file-pdf"></i> Download / Print as PDF
+                </button>
+            </div>
+
+            <!-- Preview Panel -->
+            <div class="lg:col-span-2">
+                <div id="invoice-printable" class="bg-white p-8 sm:p-12 rounded-2xl shadow-sm border border-slate-200 space-y-6">
+                    
+                    <div class="flex justify-between items-start border-b pb-6">
+                        <div>
+                            <h2 class="text-2xl font-black text-slate-900 tracking-tight">SHIVAM JOURNEYS</h2>
+                            <p class="text-xs text-slate-500 mt-1">1st Floor, Diamond Plaza, Sector - 5, Hiran Magri</p>
+                            <p class="text-xs text-slate-500">Udaipur - 313002, Rajasthan</p>
+                            <p class="text-xs text-slate-500 font-semibold mt-1">GSTIN: 08AFYFS3185D1ZE</p>
+                        </div>
+                        <div class="text-right">
+                            <h3 class="text-xl font-bold uppercase text-emerald-700" id="inv-heading-text">Tax Invoice</h3>
+                            <p class="text-xs text-slate-600 mt-1"><strong>Invoice No:</strong> <span id="preview-no">SJ/2026/001</span></p>
+                            <p class="text-xs text-slate-600"><strong>Date:</strong> <span id="preview-date">2026-10-13</span></p>
+                        </div>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-xs space-y-1">
+                        <p class="text-slate-400 font-semibold uppercase">Billed To:</p>
+                        <p class="text-base font-bold text-slate-900" id="preview-client">Rahul Sharma</p>
+                    </div>
+
+                    <table class="w-full text-left border-collapse text-xs">
+                        <thead>
+                            <tr class="bg-slate-900 text-white">
+                                <th class="p-3 rounded-l-lg">Description of Service</th>
+                                <th class="p-3">HSN/SAC</th>
+                                <th class="p-3 text-right">Tax Rate</th>
+                                <th class="p-3 text-right rounded-r-lg">Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="p-3 font-medium text-slate-900" id="preview-service">Loading...</td>
+                                <td class="p-3 text-slate-600" id="preview-hsn">--</td>
+                                <td class="p-3 text-right text-slate-600" id="preview-taxrate">18%</td>
+                                <td class="p-3 text-right font-semibold text-slate-900" id="preview-amount">₹0.00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="flex justify-end pt-4 border-t border-slate-100">
+                        <div class="w-72 space-y-2 text-xs">
+                            <div class="flex justify-between text-slate-600">
+                                <span>Taxable Value:</span>
+                                <span id="calc-subtotal">₹0.00</span>
+                            </div>
+                            <div class="flex justify-between text-slate-600">
+                                <span>GST / Taxes:</span>
+                                <span id="calc-tax">₹0.00</span>
+                            </div>
+                            <div class="flex justify-between text-slate-600">
+                                <span>Already Received:</span>
+                                <span id="calc-received">₹0.00</span>
+                            </div>
+                            <div class="flex justify-between text-sm font-bold text-slate-900 border-t pt-2">
+                                <span>Total Receivable:</span>
+                                <span id="calc-total" class="text-emerald-600">₹0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-8 pt-8 border-t text-xs text-slate-600">
+                        <div>
+                            <p class="font-bold text-slate-900 mb-1">Bank Details:</p>
+                            <p>Bank Name: Kotak Mahindra Bank</p>
+                            <p>A/C Name: Shivam Journeys</p>
+                            <p>A/C No: 9412042752 | IFSC: KKBK0002574</p>
+                        </div>
+                        <div class="text-right flex flex-col justify-end">
+                            <p class="font-bold text-slate-900 mb-8">For, Shivam Journeys</p>
+                            <p class="border-t border-slate-300 pt-1 inline-block">Authorized Signatory</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDaS-4CWHPhZIOKZC5NpqLqeSVJpcRpRlNDi4PSn8rOW8CI8clN4ho0UZqBh9GFHf_/exec";
+
+        let services = [];
+
+        async function fetchServices() {
+            try {
+                let response = await fetch(SCRIPT_URL);
+                services = await response.json();
+                populateDropdown();
+                renderServicesList();
+                updatePreview();
+            } catch (error) {
+                console.error("Error loading services:", error);
+                document.getElementById('services-list-container').innerHTML = "Error loading from Google Sheet.";
+            }
+        }
+
+        function init() {
+            document.getElementById('inv-date').valueAsDate = new Date();
+            fetchServices();
+        }
+
+        function switchTab(tab) {
+            document.getElementById('tab-generator').classList.toggle('hidden', tab !== 'generator');
+            document.getElementById('tab-settings').classList.toggle('hidden', tab !== 'settings');
+            document.getElementById('btn-generator').className = tab === 'generator' ? 'bg-emerald-600 text-white px-4 py-2 rounded-xl font-semibold text-sm shadow' : 'bg-slate-200 text-slate-700 px-4 py-2 rounded-xl font-semibold text-sm';
+            document.getElementById('btn-settings').className = tab === 'settings' ? 'bg-emerald-600 text-white px-4 py-2 rounded-xl font-semibold text-sm shadow' : 'bg-slate-200 text-slate-700 px-4 py-2 rounded-xl font-semibold text-sm';
+        }
+
+        function populateDropdown() {
+            const select = document.getElementById('inv-service');
+            select.innerHTML = '';
+            services.forEach((s, idx) => {
+                let opt = document.createElement('option');
+                opt.value = idx;
+                opt.text = `${s.name} (HSN: ${s.hsn})`;
+                select.appendChild(opt);
+            });
+        }
+
+        async function addCustomService() {
+            const name = document.getElementById('new-service-name').value.trim();
+            const hsn = document.getElementById('new-service-hsn').value.trim();
+            if(!name || !hsn) { alert('Please enter name and HSN'); return; }
+
+            alert('Saving to Google Sheet...');
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({ name, hsn })
+                });
+                document.getElementById('new-service-name').value = '';
+                document.getElementById('new-service-hsn').value = '';
+                fetchServices();
+                alert('Saved successfully!');
+            } catch(e) {
+                alert('Error saving data');
+            }
+        }
+
+        function renderServicesList() {
+            const container = document.getElementById('services-list-container');
+            container.innerHTML = '';
+            services.forEach((s) => {
+                container.innerHTML += `
+                    <div class="py-2 flex justify-between items-center text-xs">
+                        <div><strong class="text-slate-900">${s.name}</strong> <span class="text-slate-400 ml-2">(${s.hsn})</span></div>
+                    </div>
+                `;
+            });
+        }
+
+        function toggleInvoiceType() {
+            const type = document.getElementById('inv-type').value;
+            document.getElementById('inv-heading-text').innerText = type === 'customer' ? 'Tax Invoice' : 'Commission Invoice';
+            document.getElementById('lbl-client').innerText = type === 'customer' ? 'Billed To (Customer)' : 'Billed To (Supplier / MMT)';
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const no = document.getElementById('inv-no').value;
+            const date = document.getElementById('inv-date').value;
+            const client = document.getElementById('inv-client').value;
+            const serviceIdx = document.getElementById('inv-service').value;
+            const amount = parseFloat(document.getElementById('inv-amount').value) || 0;
+            const taxRate = parseFloat(document.getElementById('inv-taxrate').value) || 0;
+            const received = parseFloat(document.getElementById('inv-received').value) || 0;
+
+            const selectedService = services[serviceIdx] || { name: 'Select Service', hsn: '--' };
+
+            document.getElementById('preview-no').innerText = no;
+            document.getElementById('preview-date').innerText = date;
+            document.getElementById('preview-client').innerText = client;
+            document.getElementById('preview-service').innerText = selectedService.name;
+            document.getElementById('preview-hsn').innerText = selectedService.hsn;
+            document.getElementById('preview-taxrate').innerText = taxRate + '%';
+            document.getElementById('preview-amount').innerText = '₹' + amount.toLocaleString('en-IN', {minimumFractionDigits: 2});
+
+            const taxAmount = (amount * taxRate) / 100;
+            const grandTotal = (amount + taxAmount) - received;
+
+            document.getElementById('calc-subtotal').innerText = '₹' + amount.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('calc-tax').innerText = '₹' + taxAmount.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('calc-received').innerText = '₹' + received.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('calc-total').innerText = '₹' + grandTotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
