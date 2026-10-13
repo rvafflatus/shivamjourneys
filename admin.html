@@ -94,7 +94,7 @@
                     <input type="text" id="inv-client" value="Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm" oninput="updatePreview()">
                 </div>
 
-                <!-- Line Items Section for Multiple Services -->
+                <!-- Line Items Section with Manual Description -->
                 <div class="space-y-4 pt-2 border-t">
                     <div class="flex justify-between items-center">
                         <label class="block text-xs font-bold text-slate-700 uppercase">Invoice Line Items</label>
@@ -201,7 +201,7 @@
 
         let services = [];
         let lineItems = [
-            { serviceIdx: 0, amount: 34500, taxRate: 18 }
+            { serviceIdx: 0, desc: "3 Pax Dubai Tour Package with Flight & Hotel", amount: 34500, taxRate: 18 }
         ];
         let grandTotalValue = 0;
 
@@ -248,9 +248,10 @@
                             ${lineItems.length > 1 ? `<button onclick="removeLineItem(${index})" class="text-rose-500 hover:text-rose-700 text-xs font-bold">&times; Remove</button>` : ''}
                         </div>
                         <div>
-                            <select onchange="updateLineItem(${index}, 'serviceIdx', this.value)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs">
+                            <select onchange="updateLineItem(${index}, 'serviceIdx', this.value)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs mb-2">
                                 ${optionsHtml}
                             </select>
+                            <input type="text" value="${item.desc}" oninput="updateLineItem(${index}, 'desc', this.value)" placeholder="Manual Description (e.g. 3 Pax Tour + Hotel)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs">
                         </div>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
@@ -272,7 +273,7 @@
         }
 
         function addLineItem() {
-            lineItems.push({ serviceIdx: 0, amount: 0, taxRate: 18 });
+            lineItems.push({ serviceIdx: 0, desc: "", amount: 0, taxRate: 18 });
             renderLineItemsForm();
             updatePreview();
         }
@@ -286,8 +287,10 @@
         function updateLineItem(index, field, value) {
             if (field === 'amount') {
                 lineItems[index][field] = parseFloat(value) || 0;
-            } else {
+            } else if (field === 'taxRate') {
                 lineItems[index][field] = parseInt(value);
+            } else {
+                lineItems[index][field] = value;
             }
             updatePreview();
         }
@@ -323,7 +326,7 @@
             const type = document.getElementById('inv-type').value;
             const client = document.getElementById('inv-client').value;
             
-            const serviceNames = lineItems.map(item => services[item.serviceIdx] ? services[item.serviceIdx].name : 'Custom Service').join(', ');
+            const serviceDescriptions = lineItems.map(item => item.desc || (services[item.serviceIdx] ? services[item.serviceIdx].name : 'Service')).join(' | ');
 
             try {
                 fetch(SCRIPT_URL, {
@@ -334,7 +337,7 @@
                         date: date,
                         type: type,
                         client: client,
-                        service: serviceNames,
+                        service: serviceDescriptions,
                         totalAmount: grandTotalValue
                     })
                 });
@@ -393,6 +396,7 @@
 
             lineItems.forEach(item => {
                 const s = services[item.serviceIdx] || { name: 'Service', hsn: '--' };
+                const displayDesc = item.desc ? item.desc : s.name;
                 const itemAmount = item.amount;
                 const itemTax = (itemAmount * item.taxRate) / 100;
 
@@ -401,7 +405,7 @@
 
                 tbody.innerHTML += `
                     <tr>
-                        <td class="p-3 font-medium text-slate-900">${s.name}</td>
+                        <td class="p-3 font-medium text-slate-900">${displayDesc}</td>
                         <td class="p-3 text-slate-600">${s.hsn}</td>
                         <td class="p-3 text-right text-slate-600">${item.taxRate}%</td>
                         <td class="p-3 text-right font-semibold text-slate-900">₹${itemAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
