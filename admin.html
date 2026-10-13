@@ -94,31 +94,21 @@
                     <input type="text" id="inv-client" value="Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm" oninput="updatePreview()">
                 </div>
 
-                <div>
-                    <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Select Service</label>
-                    <select id="inv-service" onchange="updatePreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm">
-                        <option>Loading...</option>
-                    </select>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Amount (₹)</label>
-                        <input type="number" id="inv-amount" value="34500" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm" oninput="updatePreview()">
+                <!-- Line Items Section for Multiple Services -->
+                <div class="space-y-4 pt-2 border-t">
+                    <div class="flex justify-between items-center">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Invoice Line Items</label>
+                        <button onclick="addLineItem()" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                            <i class="fa-solid fa-plus mr-1"></i> Add Service
+                        </button>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Tax Rate (%)</label>
-                        <select id="inv-taxrate" onchange="updatePreview()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm">
-                            <option value="0">0% (Exempt)</option>
-                            <option value="5">5%</option>
-                            <option value="12">12%</option>
-                            <option value="18" selected>18%</option>
-                            <option value="28">28%</option>
-                        </select>
+
+                    <div id="line-items-container" class="space-y-3">
+                        <!-- Populated via JS -->
                     </div>
                 </div>
 
-                <div>
+                <div class="pt-2">
                     <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Already Received / Advance (₹)</label>
                     <input type="number" id="inv-received" value="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm" oninput="updatePreview()">
                 </div>
@@ -160,13 +150,8 @@
                                 <th class="p-3 text-right rounded-r-lg">Amount</th>
                             </tr>
                         </thead>
-                        <tbody class="divide-y divide-slate-100">
-                            <tr>
-                                <td class="p-3 font-medium text-slate-900" id="preview-service">Loading...</td>
-                                <td class="p-3 text-slate-600" id="preview-hsn">--</td>
-                                <td class="p-3 text-right text-slate-600" id="preview-taxrate">18%</td>
-                                <td class="p-3 text-right font-semibold text-slate-900" id="preview-amount">₹0.00</td>
-                            </tr>
+                        <tbody id="preview-items-body" class="divide-y divide-slate-100">
+                            <!-- Populated via JS -->
                         </tbody>
                     </table>
 
@@ -215,14 +200,17 @@
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDaS-4CWHPhZIOKZC5NpqLqeSVJpcRpRlNDi4PSn8rOW8CI8clN4ho0UZqBh9GFHf_/exec";
 
         let services = [];
+        let lineItems = [
+            { serviceIdx: 0, amount: 34500, taxRate: 18 }
+        ];
         let grandTotalValue = 0;
 
         async function fetchServices() {
             try {
                 let response = await fetch(SCRIPT_URL);
                 services = await response.json();
-                populateDropdown();
                 renderServicesList();
+                renderLineItemsForm();
                 updatePreview();
             } catch (error) {
                 console.error("Error loading services:", error);
@@ -242,15 +230,66 @@
             document.getElementById('btn-settings').className = tab === 'settings' ? 'bg-emerald-600 text-white px-4 py-2 rounded-xl font-semibold text-sm shadow' : 'bg-slate-200 text-slate-700 px-4 py-2 rounded-xl font-semibold text-sm';
         }
 
-        function populateDropdown() {
-            const select = document.getElementById('inv-service');
-            select.innerHTML = '';
-            services.forEach((s, idx) => {
-                let opt = document.createElement('option');
-                opt.value = idx;
-                opt.text = `${s.name} (HSN: ${s.hsn})`;
-                select.appendChild(opt);
+        function renderLineItemsForm() {
+            const container = document.getElementById('line-items-container');
+            container.innerHTML = '';
+            
+            lineItems.forEach((item, index) => {
+                let optionsHtml = '';
+                services.forEach((s, sIdx) => {
+                    let selected = (sIdx === item.serviceIdx) ? 'selected' : '';
+                    optionsHtml += `<option value="${sIdx}" ${selected}>${s.name} (HSN: ${s.hsn})</option>`;
+                });
+
+                container.innerHTML += `
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 relative">
+                        <div class="flex justify-between items-center">
+                            <span class="text-[10px] font-bold uppercase text-slate-400">Item #${index + 1}</span>
+                            ${lineItems.length > 1 ? `<button onclick="removeLineItem(${index})" class="text-rose-500 hover:text-rose-700 text-xs font-bold">&times; Remove</button>` : ''}
+                        </div>
+                        <div>
+                            <select onchange="updateLineItem(${index}, 'serviceIdx', this.value)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs">
+                                ${optionsHtml}
+                            </select>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div>
+                                <input type="number" value="${item.amount}" oninput="updateLineItem(${index}, 'amount', this.value)" placeholder="Amount (₹)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs">
+                            </div>
+                            <div>
+                                <select onchange="updateLineItem(${index}, 'taxRate', this.value)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs">
+                                    <option value="0" ${item.taxRate == 0 ? 'selected' : ''}>0% (Exempt)</option>
+                                    <option value="5" ${item.taxRate == 5 ? 'selected' : ''}>5% Tax</option>
+                                    <option value="12" ${item.taxRate == 12 ? 'selected' : ''}>12% Tax</option>
+                                    <option value="18" ${item.taxRate == 18 ? 'selected' : ''}>18% Tax</option>
+                                    <option value="28" ${item.taxRate == 28 ? 'selected' : ''}>28% Tax</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                `;
             });
+        }
+
+        function addLineItem() {
+            lineItems.push({ serviceIdx: 0, amount: 0, taxRate: 18 });
+            renderLineItemsForm();
+            updatePreview();
+        }
+
+        function removeLineItem(index) {
+            lineItems.splice(index, 1);
+            renderLineItemsForm();
+            updatePreview();
+        }
+
+        function updateLineItem(index, field, value) {
+            if (field === 'amount') {
+                lineItems[index][field] = parseFloat(value) || 0;
+            } else {
+                lineItems[index][field] = parseInt(value);
+            }
+            updatePreview();
         }
 
         async function addCustomService() {
@@ -267,7 +306,6 @@
                 document.getElementById('new-service-hsn').value = '';
                 fetchServices();
                 
-                // Show notification banner
                 document.getElementById('service-notification').classList.remove('hidden');
                 setTimeout(() => { hideNotification(); }, 4000);
             } catch(e) {
@@ -284,8 +322,8 @@
             const date = document.getElementById('inv-date').value;
             const type = document.getElementById('inv-type').value;
             const client = document.getElementById('inv-client').value;
-            const serviceIdx = document.getElementById('inv-service').value;
-            const selectedService = services[serviceIdx] ? services[serviceIdx].name : 'Custom Service';
+            
+            const serviceNames = lineItems.map(item => services[item.serviceIdx] ? services[item.serviceIdx].name : 'Custom Service').join(', ');
 
             try {
                 fetch(SCRIPT_URL, {
@@ -296,7 +334,7 @@
                         date: date,
                         type: type,
                         client: client,
-                        service: selectedService,
+                        service: serviceNames,
                         totalAmount: grandTotalValue
                     })
                 });
@@ -341,26 +379,40 @@
             const no = document.getElementById('inv-no').value;
             const date = document.getElementById('inv-date').value;
             const client = document.getElementById('inv-client').value;
-            const serviceIdx = document.getElementById('inv-service').value;
-            const amount = parseFloat(document.getElementById('inv-amount').value) || 0;
-            const taxRate = parseFloat(document.getElementById('inv-taxrate').value) || 0;
             const received = parseFloat(document.getElementById('inv-received').value) || 0;
-
-            const selectedService = services[serviceIdx] || { name: 'Select Service', hsn: '--' };
 
             document.getElementById('preview-no').innerText = no;
             document.getElementById('preview-date').innerText = date;
             document.getElementById('preview-client').innerText = client;
-            document.getElementById('preview-service').innerText = selectedService.name;
-            document.getElementById('preview-hsn').innerText = selectedService.hsn;
-            document.getElementById('preview-taxrate').innerText = taxRate + '%';
-            document.getElementById('preview-amount').innerText = '₹' + amount.toLocaleString('en-IN', {minimumFractionDigits: 2});
 
-            const taxAmount = (amount * taxRate) / 100;
-            grandTotalValue = (amount + taxAmount) - received;
+            const tbody = document.getElementById('preview-items-body');
+            tbody.innerHTML = '';
 
-            document.getElementById('calc-subtotal').innerText = '₹' + amount.toLocaleString('en-IN', {minimumFractionDigits: 2});
-            document.getElementById('calc-tax').innerText = '₹' + taxAmount.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            let subtotal = 0;
+            let totalTax = 0;
+
+            lineItems.forEach(item => {
+                const s = services[item.serviceIdx] || { name: 'Service', hsn: '--' };
+                const itemAmount = item.amount;
+                const itemTax = (itemAmount * item.taxRate) / 100;
+
+                subtotal += itemAmount;
+                totalTax += itemTax;
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td class="p-3 font-medium text-slate-900">${s.name}</td>
+                        <td class="p-3 text-slate-600">${s.hsn}</td>
+                        <td class="p-3 text-right text-slate-600">${item.taxRate}%</td>
+                        <td class="p-3 text-right font-semibold text-slate-900">₹${itemAmount.toLocaleString('en-IN', {minimumFractionDigits: 2})}</td>
+                    </tr>
+                `;
+            });
+
+            grandTotalValue = (subtotal + totalTax) - received;
+
+            document.getElementById('calc-subtotal').innerText = '₹' + subtotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('calc-tax').innerText = '₹' + totalTax.toLocaleString('en-IN', {minimumFractionDigits: 2});
             document.getElementById('calc-received').innerText = '₹' + received.toLocaleString('en-IN', {minimumFractionDigits: 2});
             document.getElementById('calc-total').innerText = '₹' + grandTotalValue.toLocaleString('en-IN', {minimumFractionDigits: 2});
         }
