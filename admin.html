@@ -94,11 +94,11 @@
                     <input type="text" id="inv-client" value="Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm" oninput="updatePreview()">
                 </div>
 
-                <!-- Multiple Line Items & Description Section -->
+                <!-- Up to 4 Line Items Section -->
                 <div class="space-y-4 pt-2 border-t">
                     <div class="flex justify-between items-center">
-                        <label class="block text-xs font-bold text-slate-700 uppercase">Invoice Line Items</label>
-                        <button onclick="addLineItem()" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
+                        <label class="block text-xs font-bold text-slate-700 uppercase">Invoice Line Items (Max 4)</label>
+                        <button onclick="addLineItem()" id="btn-add-item" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-700 text-xs font-semibold px-3 py-1.5 rounded-lg transition-colors">
                             <i class="fa-solid fa-plus mr-1"></i> Add Service
                         </button>
                     </div>
@@ -244,14 +244,14 @@
                 container.innerHTML += `
                     <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 relative">
                         <div class="flex justify-between items-center">
-                            <span class="text-[10px] font-bold uppercase text-slate-400">Item #${index + 1}</span>
+                            <span class="text-[10px] font-bold uppercase text-slate-400">Service #${index + 1}</span>
                             ${lineItems.length > 1 ? `<button onclick="removeLineItem(${index})" class="text-rose-500 hover:text-rose-700 text-xs font-bold">&times; Remove</button>` : ''}
                         </div>
                         <div>
                             <select onchange="updateLineItem(${index}, 'serviceIdx', this.value)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs mb-2">
                                 ${optionsHtml}
                             </select>
-                            <input type="text" value="${item.desc}" oninput="updateLineItem(${index}, 'desc', this.value)" placeholder="Manual Description (e.g. 3 Pax Tour + Hotel)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs">
+                            <input type="text" value="${item.desc}" oninput="updateLineItem(${index}, 'desc', this.value)" placeholder="Manual Description (e.g. Flight ticket)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs">
                         </div>
                         <div class="grid grid-cols-2 gap-2">
                             <div>
@@ -259,7 +259,7 @@
                             </div>
                             <div>
                                 <select onchange="updateLineItem(${index}, 'taxRate', this.value)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs">
-                                    <option value="0" ${item.taxRate == 0 ? 'selected' : ''}>0% (Exempt)</option>
+                                    <option value="0" ${item.taxRate == 0 ? 'selected' : ''}>0% Tax</option>
                                     <option value="5" ${item.taxRate == 5 ? 'selected' : ''}>5% Tax</option>
                                     <option value="12" ${item.taxRate == 12 ? 'selected' : ''}>12% Tax</option>
                                     <option value="18" ${item.taxRate == 18 ? 'selected' : ''}>18% Tax</option>
@@ -270,12 +270,16 @@
                     </div>
                 `;
             });
+
+            document.getElementById('btn-add-item').style.display = lineItems.length >= 4 ? 'none' : 'block';
         }
 
         function addLineItem() {
-            lineItems.push({ serviceIdx: 0, desc: "", amount: 0, taxRate: 18 });
-            renderLineItemsForm();
-            updatePreview();
+            if (lineItems.length < 4) {
+                lineItems.push({ serviceIdx: 0, desc: "", amount: 0, taxRate: 18 });
+                renderLineItemsForm();
+                updatePreview();
+            }
         }
 
         function removeLineItem(index) {
@@ -326,7 +330,15 @@
             const type = document.getElementById('inv-type').value;
             const client = document.getElementById('inv-client').value;
             
-            const serviceDescriptions = lineItems.map(item => item.desc || (services[item.serviceIdx] ? services[item.serviceIdx].name : 'Service')).join(' | ');
+            const itemsPayload = lineItems.map(item => {
+                const sName = services[item.serviceIdx] ? services[item.serviceIdx].name : 'Service';
+                return {
+                    service: sName,
+                    desc: item.desc || sName,
+                    taxRate: item.taxRate,
+                    amount: item.amount
+                };
+            });
 
             try {
                 fetch(SCRIPT_URL, {
@@ -337,7 +349,7 @@
                         date: date,
                         type: type,
                         client: client,
-                        service: serviceDescriptions,
+                        items: itemsPayload,
                         totalAmount: grandTotalValue
                     })
                 });
