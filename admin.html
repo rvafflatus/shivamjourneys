@@ -94,19 +94,18 @@
                     <input type="text" id="inv-client" value="Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm" oninput="updatePreview()">
                 </div>
 
-                <!-- Line Items Section with Clear Add Button -->
+                <!-- Hardcoded Line Items Section & Add Button -->
                 <div class="space-y-4 pt-2 border-t">
                     <div class="flex justify-between items-center">
                         <label class="block text-xs font-bold text-slate-700 uppercase">Invoice Services (Max 4)</label>
                     </div>
 
                     <div id="line-items-container" class="space-y-3">
-                        <!-- Populated via JS -->
+                        <!-- Dynamic rows will render here -->
                     </div>
 
-                    <!-- Prominent Add Service Button -->
-                    <button onclick="addLineItem()" id="btn-add-item" class="w-full bg-slate-100 hover:bg-emerald-50 text-emerald-700 border-2 border-dashed border-emerald-300 font-semibold py-2.5 rounded-xl text-xs transition-all flex items-center justify-center gap-2">
-                        <i class="fa-solid fa-plus-circle"></i> Add Another Service Below
+                    <button type="button" onclick="addLineItem()" id="btn-add-item" class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-2 border-dashed border-emerald-300 font-bold py-3 rounded-xl text-xs transition-all flex items-center justify-center gap-2 shadow-sm">
+                        <i class="fa-solid fa-plus-circle text-base"></i> + Add Another Service Below
                     </button>
                 </div>
 
@@ -244,13 +243,13 @@
                 });
 
                 container.innerHTML += `
-                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-200 space-y-2 relative">
+                    <div class="bg-slate-50 p-3 rounded-xl border border-slate-300 space-y-2 relative shadow-sm">
                         <div class="flex justify-between items-center">
-                            <span class="text-[10px] font-bold uppercase text-slate-600">Service #${index + 1}</span>
-                            ${lineItems.length > 1 ? `<button onclick="removeLineItem(${index})" class="text-rose-500 hover:text-rose-700 text-xs font-bold">&times; Remove</button>` : ''}
+                            <span class="text-[11px] font-extrabold uppercase text-emerald-700">Service Item #${index + 1}</span>
+                            ${lineItems.length > 1 ? `<button type="button" onclick="removeLineItem(${index})" class="text-rose-600 hover:text-rose-800 text-xs font-bold bg-rose-50 px-2 py-0.5 rounded">&times; Remove</button>` : ''}
                         </div>
                         <div>
-                            <select onchange="updateLineItem(${index}, 'serviceIdx', this.value)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs mb-2">
+                            <select onchange="updateLineItem(${index}, 'serviceIdx', this.value)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs mb-2 font-medium">
                                 ${optionsHtml}
                             </select>
                             <input type="text" value="${item.desc}" oninput="updateLineItem(${index}, 'desc', this.value)" placeholder="Manual Description (e.g. Flight ticket)" class="w-full bg-white border border-slate-200 rounded-lg px-3 py-1.5 text-xs">
@@ -274,7 +273,12 @@
             });
 
             // Hide Add button if 4 items reached
-            document.getElementById('btn-add-item').style.display = lineItems.length >= 4 ? 'none' : 'flex';
+            const addBtn = document.getElementById('btn-add-item');
+            if (lineItems.length >= 4) {
+                addBtn.style.display = 'none';
+            } else {
+                addBtn.style.display = 'flex';
+            }
         }
 
         function addLineItem() {
