@@ -23,7 +23,7 @@
         <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4 no-print">
             <div>
                 <h1 class="text-2xl font-extrabold text-slate-900">Shivam Journeys Admin Panel</h1>
-                <p class="text-slate-500 text-sm">Invoicing connected live with Google Sheets.</p>
+                <p class="text-slate-500 text-sm">Invoicing & Accounting connected live with Google Sheets.</p>
             </div>
             <div class="flex items-center gap-3">
                 <button onclick="switchTab('generator')" id="btn-generator" class="bg-emerald-600 text-white px-4 py-2 rounded-xl font-semibold text-sm shadow">Create Invoice</button>
@@ -116,8 +116,8 @@
                     <input type="number" id="inv-received" value="0" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm" oninput="updatePreview()">
                 </div>
 
-                <button onclick="window.print()" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-semibold py-3 rounded-xl text-sm transition-all shadow-lg flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-file-pdf"></i> Download / Print as PDF
+                <button onclick="saveAndPrintInvoice()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 rounded-xl text-sm transition-all shadow-lg flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> Save to Sheet & Print PDF
                 </button>
             </div>
 
@@ -208,6 +208,7 @@
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxDaS-4CWHPhZIOKZC5NpqLqeSVJpcRpRlNDi4PSn8rOW8CI8clN4ho0UZqBh9GFHf_/exec";
 
         let services = [];
+        let grandTotalValue = 0;
 
         async function fetchServices() {
             try {
@@ -265,6 +266,36 @@
             }
         }
 
+        async function saveAndPrintInvoice() {
+            const invNo = document.getElementById('inv-no').value;
+            const date = document.getElementById('inv-date').value;
+            const type = document.getElementById('inv-type').value;
+            const client = document.getElementById('inv-client').value;
+            const serviceIdx = document.getElementById('inv-service').value;
+            const selectedService = services[serviceIdx] ? services[serviceIdx].name : 'Custom Service';
+
+            // Background me Google Sheet par record save karein
+            try {
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        action: "saveInvoice",
+                        invNo: invNo,
+                        date: date,
+                        type: type,
+                        client: client,
+                        service: selectedService,
+                        totalAmount: grandTotalValue
+                    })
+                });
+            } catch(e) {
+                console.log("Background save error:", e);
+            }
+
+            // Turant PDF Print / Download dialog kholen
+            window.print();
+        }
+
         function renderServicesList() {
             const container = document.getElementById('services-list-container');
             container.innerHTML = '';
@@ -304,12 +335,12 @@
             document.getElementById('preview-amount').innerText = '₹' + amount.toLocaleString('en-IN', {minimumFractionDigits: 2});
 
             const taxAmount = (amount * taxRate) / 100;
-            const grandTotal = (amount + taxAmount) - received;
+            grandTotalValue = (amount + taxAmount) - received;
 
             document.getElementById('calc-subtotal').innerText = '₹' + amount.toLocaleString('en-IN', {minimumFractionDigits: 2});
             document.getElementById('calc-tax').innerText = '₹' + taxAmount.toLocaleString('en-IN', {minimumFractionDigits: 2});
             document.getElementById('calc-received').innerText = '₹' + received.toLocaleString('en-IN', {minimumFractionDigits: 2});
-            document.getElementById('calc-total').innerText = '₹' + grandTotal.toLocaleString('en-IN', {minimumFractionDigits: 2});
+            document.getElementById('calc-total').innerText = '₹' + grandTotalValue.toLocaleString('en-IN', {minimumFractionDigits: 2});
         }
 
         window.onload = init;
