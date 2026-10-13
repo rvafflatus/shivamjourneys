@@ -34,7 +34,7 @@
 
         <!-- TAB 1: SERVICE SETTINGS -->
         <div id="tab-settings" class="hidden bg-white p-6 sm:p-8 rounded-2xl shadow-sm space-y-6 no-print">
-            <h2 class="text-xl font-bold text-slate-900">Add Service to Google Sheet</h2>
+            <h2 class="text-xl font-bold text-slate-900">Add New Service / Item</h2>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                     <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Service / Item Name</label>
@@ -45,8 +45,14 @@
                     <input type="text" id="new-service-hsn" placeholder="e.g. 998552" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
                 </div>
                 <div class="flex items-end">
-                    <button onclick="addCustomService()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors">Save to Sheet</button>
+                    <button onclick="addCustomService()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors">Save</button>
                 </div>
+            </div>
+
+            <!-- Success Notification Banner -->
+            <div id="service-notification" class="hidden bg-emerald-50 border border-emerald-200 text-emerald-800 px-4 py-3 rounded-xl text-sm font-medium flex items-center justify-between">
+                <span><i class="fa-solid fa-circle-check mr-2 text-emerald-600"></i> Service saved successfully to Google Sheet!</span>
+                <button onclick="hideNotification()" class="text-emerald-700 font-bold">&times;</button>
             </div>
 
             <div>
@@ -67,6 +73,7 @@
                     <label class="block text-xs font-semibold text-slate-500 uppercase mb-1">Invoice Type</label>
                     <select id="inv-type" onchange="toggleInvoiceType()" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm">
                         <option value="customer">Customer Tax Invoice</option>
+                        <option value="b2b">B2B Tax Invoice</option>
                         <option value="commission">B2B Commission Invoice</option>
                     </select>
                 </div>
@@ -140,7 +147,7 @@
                     </div>
 
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 text-xs space-y-1">
-                        <p class="text-slate-400 font-semibold uppercase">Billed To:</p>
+                        <p class="text-slate-400 font-semibold uppercase" id="preview-billed-label">Billed To:</p>
                         <p class="text-base font-bold text-slate-900" id="preview-client">Rahul Sharma</p>
                     </div>
 
@@ -251,7 +258,6 @@
             const hsn = document.getElementById('new-service-hsn').value.trim();
             if(!name || !hsn) { alert('Please enter name and HSN'); return; }
 
-            alert('Saving to Google Sheet...');
             try {
                 await fetch(SCRIPT_URL, {
                     method: 'POST',
@@ -260,10 +266,17 @@
                 document.getElementById('new-service-name').value = '';
                 document.getElementById('new-service-hsn').value = '';
                 fetchServices();
-                alert('Saved successfully!');
+                
+                // Show notification banner
+                document.getElementById('service-notification').classList.remove('hidden');
+                setTimeout(() => { hideNotification(); }, 4000);
             } catch(e) {
                 alert('Error saving data');
             }
+        }
+
+        function hideNotification() {
+            document.getElementById('service-notification').classList.add('hidden');
         }
 
         async function saveAndPrintInvoice() {
@@ -274,7 +287,6 @@
             const serviceIdx = document.getElementById('inv-service').value;
             const selectedService = services[serviceIdx] ? services[serviceIdx].name : 'Custom Service';
 
-            // Background me Google Sheet par record save karein
             try {
                 fetch(SCRIPT_URL, {
                     method: 'POST',
@@ -292,7 +304,6 @@
                 console.log("Background save error:", e);
             }
 
-            // Turant PDF Print / Download dialog kholen
             window.print();
         }
 
@@ -310,8 +321,19 @@
 
         function toggleInvoiceType() {
             const type = document.getElementById('inv-type').value;
-            document.getElementById('inv-heading-text').innerText = type === 'customer' ? 'Tax Invoice' : 'Commission Invoice';
-            document.getElementById('lbl-client').innerText = type === 'customer' ? 'Billed To (Customer)' : 'Billed To (Supplier / MMT)';
+            if(type === 'customer') {
+                document.getElementById('inv-heading-text').innerText = 'Tax Invoice';
+                document.getElementById('lbl-client').innerText = 'Client / Billed To Name';
+                document.getElementById('preview-billed-label').innerText = 'Billed To:';
+            } else if(type === 'b2b') {
+                document.getElementById('inv-heading-text').innerText = 'B2B Tax Invoice';
+                document.getElementById('lbl-client').innerText = 'Business / Company Name';
+                document.getElementById('preview-billed-label').innerText = 'Billed To (B2B):';
+            } else {
+                document.getElementById('inv-heading-text').innerText = 'Commission Invoice';
+                document.getElementById('lbl-client').innerText = 'Supplier / MMT Name';
+                document.getElementById('preview-billed-label').innerText = 'Billed To (Supplier):';
+            }
             updatePreview();
         }
 
