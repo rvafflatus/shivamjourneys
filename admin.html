@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Invoicing & Accounting | Shivam Journeys</title>
+    <title>Admin Invoicing & Accounting | Shivam Journeys, India</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -22,7 +22,7 @@
         <!-- Header Controls -->
         <div class="bg-white p-6 rounded-2xl shadow-sm flex flex-col sm:flex-row justify-between items-center gap-4 no-print">
             <div>
-                <h1 class="text-2xl font-extrabold text-slate-900">Shivam Journeys Admin Panel</h1>
+                <h1 class="text-2xl font-extrabold text-slate-900">Shivam Journeys, India Admin Panel</h1>
                 <p class="text-slate-500 text-sm">Invoicing & Accounting connected live with Google Sheets.</p>
             </div>
             <div class="flex items-center gap-3">
@@ -94,7 +94,7 @@
                     <input type="text" id="inv-client" value="Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm" oninput="updatePreview()">
                 </div>
 
-                <!-- Hardcoded Line Items Section & Add Button -->
+                <!-- Line Items Section & Add Button -->
                 <div class="space-y-4 pt-2 border-t">
                     <div class="flex justify-between items-center">
                         <label class="block text-xs font-bold text-slate-700 uppercase">Invoice Services (Max 4)</label>
@@ -125,7 +125,7 @@
                     
                     <div class="flex justify-between items-start border-b pb-6">
                         <div>
-                            <h2 class="text-2xl font-black text-slate-900 tracking-tight">SHIVAM JOURNEYS</h2>
+                            <h2 class="text-2xl font-black text-slate-900 tracking-tight">SHIVAM JOURNEYS, INDIA</h2>
                             <p class="text-xs text-slate-500 mt-1">1st Floor, Diamond Plaza, Sector - 5, Hiran Magri</p>
                             <p class="text-xs text-slate-500">Udaipur - 313002, Rajasthan</p>
                             <p class="text-xs text-slate-500 font-semibold mt-1">GSTIN: 08AFYFS3185D1ZE</p>
@@ -177,16 +177,22 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-2 gap-8 pt-8 border-t text-xs text-slate-600">
+                    <div class="grid grid-cols-2 gap-8 pt-8 border-t text-xs text-slate-600 items-start">
                         <div>
-                            <p class="font-bold text-slate-900 mb-1">Bank Details:</p>
-                            <p>Bank Name: Kotak Mahindra Bank</p>
-                            <p>A/C Name: Shivam Journeys</p>
-                            <p>A/C No: 9412042752 | IFSC: KKBK0002574</p>
+                            <p class="font-bold text-slate-900 mb-1">Bank Details (IDFC FIRST Bank):</p>
+                            <p>Bank Name: IDFC FIRST Bank</p>
+                            <p>A/C Name: SHIVAM JOURNEYS INDIA</p>
+                            <p>A/C No: 10308744368 | IFSC: IDFB0042564</p>
+                            <p class="mt-2 text-[10px] text-slate-400"><a href="Cancelled cheque.jpeg" target="_blank" class="underline hover:text-emerald-600"><i class="fa-solid fa-image mr-1"></i> View Cancelled Cheque</a></p>
                         </div>
-                        <div class="text-right flex flex-col justify-end">
-                            <p class="font-bold text-slate-900 mb-8">For, Shivam Journeys</p>
-                            <p class="border-t border-slate-300 pt-1 inline-block">Authorized Signatory</p>
+                        <div class="text-right flex flex-col items-end relative">
+                            <p class="font-bold text-slate-900 mb-2">For, SHIVAM JOURNEYS INDIA</p>
+                            <!-- Company Seal & Signature Overlay -->
+                            <div class="relative inline-block my-2">
+                                <img src="WhatsApp Image 2026-10-14 at 1.51.57 PM.jpeg" alt="Company Seal" class="w-24 h-24 object-contain opacity-80 absolute -top-8 -left-10 pointer-events-none">
+                                <img src="WhatsApp Image 2026-09-23 at 11.13.57 AM.jpeg" alt="Authorized Signature" class="w-32 h-16 object-contain relative z-10">
+                            </div>
+                            <p class="border-t border-slate-300 pt-1 inline-block mt-2">Authorized Signatory</p>
                         </div>
                     </div>
 
@@ -272,7 +278,6 @@
                 `;
             });
 
-            // Hide Add button if 4 items reached
             const addBtn = document.getElementById('btn-add-item');
             if (lineItems.length >= 4) {
                 addBtn.style.display = 'none';
