@@ -1,134 +1,313 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 10 Trekking Places in India & Adventure Tours | Shivam Journeys, India</title>
-    <meta name="description" content="Explore the top 10 trekking places in India with Shivam Journeys, India. Get expert trek guides, difficulty levels, best times to visit, safety guidelines, and instant WhatsApp booking.">
+    <title>Top 10 Trekking Places in India | Masterpiece Adventure Portal - Shivam Journeys</title>
+    <meta name="description" content="Discover the ultimate Top 10 trekking expeditions in India with Shivam Journeys. Expert guides, difficulty levels, safety guidelines, and instant WhatsApp booking.">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { 50: '#f0fdf4', 100: '#dcfce7', 600: '#16a34a', 700: '#15803d', 800: '#166534', 900: '#14532d' },
+                        accent: { 500: '#f59e0b', 600: '#d97706' }
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
     <!-- Header / Navigation -->
-    <header class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+    <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex justify-between items-center">
             <div>
-                <a href="index.html" class="text-xl font-black text-slate-900 tracking-tight">SHIVAM JOURNEYS, INDIA</a>
+                <a href="index.html" class="text-xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                    <i class="fa-solid fa-mountain-sun text-brand-600"></i> SHIVAM JOURNEYS
+                </a>
                 <p class="text-xs text-slate-500">Udaipur, Rajasthan</p>
             </div>
-            <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
-                <a href="index.html" class="text-slate-600 hover:text-emerald-600 transition-colors">Home</a>
-                <a href="trekking.html" class="text-emerald-600">Trekking Expeditions</a>
-                <a href="admin.html" class="text-slate-600 hover:text-emerald-600 transition-colors">Admin Portal</a>
+            <nav class="hidden md:flex items-center gap-6 text-sm font-semibold text-slate-700">
+                <a href="index.html" class="hover:text-brand-600 transition-colors">Home</a>
+                <a href="tours.html" class="hover:text-brand-600 transition-colors">Tour Packages</a>
+                <a href="trekking.html" class="text-brand-600 font-bold">Trekking Expeditions</a>
+                <a href="admin.html" class="hover:text-brand-600 transition-colors">Admin Portal</a>
             </nav>
-            <a href="#inquiry-form" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-bold shadow-sm transition-all">Book a Trek</a>
+            <a href="#inquiry-form" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow-md shadow-brand-600/20 transition-all hover:-translate-y-0.5">
+                <i class="fa-brands fa-whatsapp mr-1.5 text-base"></i> Book a Trek
+            </a>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-slate-900 text-white py-16 px-4 text-center space-y-4">
-        <div class="max-w-3xl mx-auto space-y-4">
-            <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider">Adventure Tourism</span>
-            <h1 class="text-3xl sm:text-5xl font-black tracking-tight">Top 10 Trekking Places in India</h1>
-            <p class="text-slate-300 text-sm sm:text-base">Embark on breathtaking Himalayan journeys and scenic alpine trails. Check out expert safety guidelines, best seasons, and secure your slot instantly via WhatsApp.</p>
+    <!-- Masterpiece Hero Section -->
+    <section class="relative bg-slate-950 text-white py-24 px-4 sm:px-8 overflow-hidden flex items-center justify-center min-h-[460px]">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80" alt="Himalayan Treks" class="w-full h-full object-cover object-center opacity-45 scale-105">
+            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/60 to-transparent"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl mx-auto text-center space-y-6">
+            <span class="inline-flex items-center gap-2 bg-brand-600/30 border border-brand-500/40 text-brand-300 text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full backdrop-blur-md">
+                <i class="fa-solid fa-compass"></i> Ultimate Adventure Collection
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight leading-tight">
+                Top 10 Trekking Destinations in <span class="text-brand-400">India</span>
+            </h1>
+            <p class="text-slate-300 text-base sm:text-xl font-light max-w-2xl mx-auto leading-relaxed">
+                From frozen high-altitude rivers to blooming alpine valleys, experience India's most breathtaking mountain trails curated with expert guidance and seamless booking.
+            </p>
         </div>
     </section>
 
-    <!-- Main Content & Treks List -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 py-12 grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <!-- Main Content Layout -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
         
-        <!-- Treks Catalog (2 Columns) -->
-        <div class="lg:col-span-2 space-y-8">
-            <h2 class="text-2xl font-black text-slate-900 border-b pb-3">Curated Himalayan & Alpine Trails</h2>
+        <!-- Treks Catalog (Top 10 Treks) -->
+        <div class="lg:col-span-2 space-y-10">
+            <div class="border-b pb-4 flex justify-between items-end">
+                <div>
+                    <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Handpicked Trails</span>
+                    <h2 class="text-3xl font-black text-slate-900 mt-1">The Complete Top 10 List</h2>
+                </div>
+                <span class="text-xs text-slate-500 font-medium">Showing 10 Masterpieces</span>
+            </div>
 
             <!-- Trek 1 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden space-y-4">
-                <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1000&q=80" alt="Hampta Pass Trek" class="w-full h-64 object-cover">
-                <div class="p-6 space-y-3">
-                    <div class="flex justify-between items-center">
-                        <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-lg">Moderate • 4-5 Days</span>
-                        <span class="text-xs font-semibold text-slate-500">Best Time: June - Oct</span>
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1200&q=80" alt="Chadar Trek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#1 Winter Expedition</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-rose-100">Extreme • 9 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: Jan - Feb</span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900">1. Hampta Pass Trek, Himachal Pradesh</h3>
-                    <p class="text-sm text-slate-600">A dramatic crossover trek connecting the lush green Kullu valley to the stark, rugged landscape of Lahaul & Spiti. Perfect for enthusiastic beginners and nature lovers.</p>
+                    <h3 class="text-2xl font-extrabold text-slate-900">1. Chadar Trek, Ladakh</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Walk over the frozen Zanskar River amidst dramatic canyon walls in sub-zero temperatures. A once-in-a-lifetime extreme winter adventure for seasoned trekkers.</p>
                 </div>
             </article>
 
             <!-- Trek 2 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden space-y-4">
-                <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1000&q=80" alt="Kashmir Great Lakes Trek" class="w-full h-64 object-cover">
-                <div class="p-6 space-y-3">
-                    <div class="flex justify-between items-center">
-                        <span class="bg-amber-50 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-lg">Difficult • 7-8 Days</span>
-                        <span class="text-xs font-semibold text-slate-500">Best Time: July - Sept</span>
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1200&q=80" alt="Hampta Pass Trek" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#2 Crossover Favorite</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-emerald-100">Moderate • 5 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: June - Oct</span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900">2. Kashmir Great Lakes Trek, Jammu & Kashmir</h3>
-                    <p class="text-sm text-slate-600">Widely considered one of the most pristine alpine lake treks in the world. Walk past vibrant meadows, pine forests, and turquoise high-altitude lakes.</p>
+                    <h3 class="text-2xl font-extrabold text-slate-900">2. Hampta Pass Trek, Himachal Pradesh</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">A dramatic crossover trail connecting the lush green Kullu valley to the stark, arid landscapes of Lahaul & Spiti. Ideal for enthusiastic beginners.</p>
                 </div>
             </article>
 
             <!-- Trek 3 -->
-            <article class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden space-y-4">
-                <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80" alt="Valley of Flowers Trek" class="w-full h-64 object-cover">
-                <div class="p-6 space-y-3">
-                    <div class="flex justify-between items-center">
-                        <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-1 rounded-lg">Easy to Moderate • 5 Days</span>
-                        <span class="text-xs font-semibold text-slate-500">Best Time: July - Aug</span>
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80" alt="Kashmir Great Lakes" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#3 Alpine Paradise</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-amber-50 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-amber-100">Difficult • 7 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: July - Sept</span>
                     </div>
-                    <h3 class="text-xl font-bold text-slate-900">3. Valley of Flowers Trek, Uttarakhand</h3>
-                    <p class="text-sm text-slate-600">A UNESCO World Heritage site blanketed by hundreds of species of endemic alpine flowers during the monsoon season. A visual treat for photographers and family trekkers.</p>
+                    <h3 class="text-2xl font-extrabold text-slate-900">3. Kashmir Great Lakes Trek, Jammu & Kashmir</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Widely regarded as heaven on earth, this trail takes you past vibrant meadows, pine forests, and breathtaking turquoise alpine lakes.</p>
                 </div>
             </article>
+
+            <!-- Trek 4 -->
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1200&q=80" alt="Valley of Flowers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#4 UNESCO Heritage</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-emerald-100">Easy-Moderate • 5 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: July - Aug</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900">4. Valley of Flowers Trek, Uttarakhand</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">A vibrant UNESCO World Heritage Site blanketed by hundreds of species of endemic alpine wildflowers during the monsoon season.</p>
+                </div>
+            </article>
+
+            <!-- Trek 5 -->
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80" alt="Roopkund Trek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#5 Mystery Lake</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-amber-50 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-amber-100">Difficult • 8 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: May - Oct</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900">5. Roopkund Trek, Uttarakhand</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Famous for the mysterious skeletal remains found at the edge of the glacial lake, offering magnificent views of Mount Trishul and Nanda Ghunti.</p>
+                </div>
+            </article>
+
+            <!-- Trek 6 -->
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&q=80" alt="Sandakphu Trek" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#6 Highest Peak in WB</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-emerald-100">Moderate • 6 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: Oct - April</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900">6. Sandakphu Trek, West Bengal</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">The highest point in West Bengal providing a rare panoramic 'Sleeping Buddha' view encompassing four of the world's five highest peaks.</p>
+                </div>
+            </article>
+
+            <!-- Trek 7 -->
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80" alt="Har Ki Dun" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#7 Cradle-Shaped Valley</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-emerald-100">Moderate • 7 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: Mar - June, Sep - Dec</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900">7. Har Ki Dun Trek, Uttarakhand</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">A cradle-shaped hanging valley rich in mythology, ancient wooden villages, alpine forests, and stunning glacier views.</p>
+                </div>
+            </article>
+
+            <!-- Trek 8 -->
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=1200&q=80" alt="Kedartal" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#8 Glacial Lake</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-rose-50 text-rose-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-rose-100">Difficult • 7 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: May - June, Sep - Oct</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900">8. Kedartal Trek, Uttarakhand</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">A pristine glacial lake situated at 4,750 meters near the majestic Thalaysagar peak. A challenging high-altitude trek for experienced trekkers.</p>
+                </div>
+            </article>
+
+            <!-- Trek 9 -->
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80" alt="Tarsar Marsar" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#9 Twin Alpine Lakes</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-amber-50 text-amber-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-amber-100">Moderate-Difficult • 7 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: July - Sep</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900">9. Tarsar Marsar Trek, Jammu & Kashmir</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">Explore almond-shaped twin alpine lakes hidden in the folds of the Kashmir mountains, surrounded by breathtaking green meadows.</p>
+                </div>
+            </article>
+
+            <!-- Trek 10 -->
+            <article class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden hover:shadow-xl transition-all duration-300 group">
+                <div class="h-72 overflow-hidden relative">
+                    <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?auto=format&fit=crop&w=1200&q=80" alt="Meesapulimala" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    <div class="absolute top-4 left-4 bg-slate-900/80 backdrop-blur-md text-white text-xs font-bold px-3 py-1.5 rounded-xl">#10 Western Ghats Peak</div>
+                </div>
+                <div class="p-8 space-y-4">
+                    <div class="flex flex-wrap justify-between items-center gap-2">
+                        <span class="bg-emerald-50 text-emerald-700 text-xs font-bold px-3 py-1.5 rounded-xl border border-emerald-100">Moderate • 2 Days</span>
+                        <span class="text-xs font-bold text-slate-500"><i class="fa-regular fa-calendar text-brand-600 mr-1"></i> Best Time: Sep - Feb</span>
+                    </div>
+                    <h3 class="text-2xl font-extrabold text-slate-900">10. Meesapulimala Trek, Kerala</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed">The second highest peak in the Western Ghats offering a surreal experience of walking above the clouds through rolling shola forests and tea estates.</p>
+                </div>
+            </article>
+
         </div>
 
         <!-- Sidebar: WhatsApp Booking & Safety Guidelines -->
-        <div class="space-y-6">
+        <div class="space-y-8">
             
             <!-- WhatsApp Inquiry Form Box -->
-            <div id="inquiry-form" class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4 sticky top-24">
-                <div class="border-b pb-3">
-                    <h3 class="text-lg font-bold text-slate-900"><i class="fa-brands fa-whatsapp text-emerald-600 mr-2"></i> Quick WhatsApp Booking</h3>
-                    <p class="text-xs text-slate-500 mt-1">Fill details to inquire or book your trek instantly on WhatsApp.</p>
+            <div id="inquiry-form" class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 space-y-6 sticky top-24">
+                <div class="border-b pb-4">
+                    <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Instant Booking</span>
+                    <h3 class="text-xl font-black text-slate-900 mt-1 flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-emerald-600 text-2xl"></i> WhatsApp Trek Inquiry
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-1">Submit your details to chat instantly with our expert travel operators in Udaipur.</p>
                 </div>
 
-                <div class="space-y-3 text-sm">
+                <div class="space-y-4 text-sm">
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Your Full Name</label>
-                        <input type="text" id="wa-name" placeholder="Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-emerald-600">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Your Full Name</label>
+                        <input type="text" id="wa-name" placeholder="Rahul Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600 font-medium">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Phone Number</label>
-                        <input type="tel" id="wa-phone" placeholder="9876543210" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-emerald-600">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Phone Number</label>
+                        <input type="tel" id="wa-phone" placeholder="9876543210" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600 font-medium">
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Select Trek</label>
-                        <select id="wa-trek" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-medium focus:outline-none focus:border-emerald-600">
-                            <option value="Hampta Pass Trek">Hampta Pass Trek (HP)</option>
-                            <option value="Kashmir Great Lakes Trek">Kashmir Great Lakes Trek (J&K)</option>
-                            <option value="Valley of Flowers Trek">Valley of Flowers Trek (UK)</option>
-                            <option value="Other Trek / Custom Tour">Other Trek / Custom Tour</option>
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Select Preferred Trek</label>
+                        <select id="wa-trek" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm font-semibold focus:outline-none focus:border-brand-600">
+                            <option value="1. Chadar Trek (Ladakh)">1. Chadar Trek (Ladakh)</option>
+                            <option value="2. Hampta Pass Trek (Himachal)">2. Hampta Pass Trek (Himachal)</option>
+                            <option value="3. Kashmir Great Lakes Trek">3. Kashmir Great Lakes Trek</option>
+                            <option value="4. Valley of Flowers Trek (Uttarakhand)">4. Valley of Flowers Trek (Uttarakhand)</option>
+                            <option value="5. Roopkund Trek (Uttarakhand)">5. Roopkund Trek (Uttarakhand)</option>
+                            <option value="6. Sandakphu Trek (West Bengal)">6. Sandakphu Trek (West Bengal)</option>
+                            <option value="7. Har Ki Dun Trek (Uttarakhand)">7. Har Ki Dun Trek (Uttarakhand)</option>
+                            <option value="8. Kedartal Trek (Uttarakhand)">8. Kedartal Trek (Uttarakhand)</option>
+                            <option value="9. Tarsar Marsar Trek (Kashmir)">9. Tarsar Marsar Trek (Kashmir)</option>
+                            <option value="10. Meesapulimala Trek (Kerala)">10. Meesapulimala Trek (Kerala)</option>
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-slate-600 uppercase mb-1">Preferred Booking Dates</label>
-                        <input type="text" id="wa-dates" placeholder="e.g. 15 Nov - 20 Nov 2026" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:border-emerald-600">
+                        <label class="block text-xs font-bold text-slate-700 uppercase mb-1.5">Tour Booking Dates</label>
+                        <input type="text" id="wa-dates" placeholder="e.g. 15 Nov - 22 Nov 2026" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-brand-600 font-medium">
                     </div>
 
-                    <button onclick="sendToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 mt-4">
-                        <i class="fa-brands fa-whatsapp text-lg"></i> Send Inquiry via WhatsApp
+                    <button onclick="sendToWhatsApp()" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition-all shadow-lg shadow-emerald-600/30 flex items-center justify-center gap-2 mt-4 text-sm">
+                        <i class="fa-brands fa-whatsapp text-xl"></i> Send Inquiry via WhatsApp
                     </button>
                 </div>
             </div>
 
             <!-- Trekking Guidelines & Risk Advice -->
-            <div class="bg-emerald-50 border border-emerald-200 p-6 rounded-2xl space-y-3 text-xs text-emerald-900">
-                <h4 class="font-bold uppercase tracking-wider text-emerald-800"><i class="fa-solid fa-shield-halved mr-1"></i> Essential Trek Guidelines & Safety</h4>
-                <ul class="list-disc pl-4 space-y-1.5">
-                    <li><strong>Cardio Fitness:</strong> Start running or brisk walking at least 3 weeks prior to high-altitude treks.</li>
-                    <li><strong>Hydration:</strong> Drink 3-4 liters of water daily during the trek to prevent AMS (Acute Mountain Sickness).</li>
-                    <li><strong>Layering:</strong> Pack thermal innerwear, windproof jackets, and waterproof trekking shoes.</li>
-                    <li><strong>Certified Support:</strong> All trips include experienced guides, medical kits, and safety gear.</li>
+            <div class="bg-brand-50 border border-brand-200 p-8 rounded-3xl space-y-4 text-xs text-brand-900 shadow-sm">
+                <h4 class="font-extrabold text-sm uppercase tracking-wider text-brand-800 flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-brand-600 text-base"></i> Essential Guidelines & Risk Safety
+                </h4>
+                <ul class="space-y-2.5 text-slate-700">
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-check text-brand-600 mt-0.5"></i>
+                        <span><strong>Cardio Training:</strong> Begin running or endurance training at least 3-4 weeks prior.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-check text-brand-600 mt-0.5"></i>
+                        <span><strong>Hydration & AMS:</strong> Drink 3-4 liters of water daily to prevent acute mountain sickness.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-check text-brand-600 mt-0.5"></i>
+                        <span><strong>Gear Essentials:</strong> Carry proper thermal layers, windproof jackets, and waterproof grip shoes.</span>
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <i class="fa-solid fa-circle-check text-brand-600 mt-0.5"></i>
+                        <span><strong>Certified Leaders:</strong> All our expeditions include certified mountain guides and oxygen kits.</span>
+                    </li>
                 </ul>
             </div>
 
@@ -137,9 +316,27 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-900 text-white py-8 px-4 text-center text-xs space-y-2 mt-12">
-        <p>© 2026 Shivam Journeys, India. All rights reserved. Registered Travel & Adventure Operator.</p>
-        <p class="text-slate-400">1st Floor, Diamond Plaza, Sector - 5, Hiran Magri, Udaipur - 313002, Rajasthan</p>
+    <footer class="bg-slate-950 text-slate-400 py-12 px-4 sm:px-8 border-t border-slate-900 mt-16">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 mb-8 text-xs">
+            <div>
+                <div class="flex items-center gap-2.5 mb-4">
+                    <span class="text-lg font-bold text-white">Shivam Journeys, India</span>
+                </div>
+                <p class="text-slate-400">Your trusted travel partner and adventure tour operator based in Udaipur, Rajasthan.</p>
+            </div>
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-3">Head Office</h4>
+                <p class="text-slate-300 leading-relaxed"><i class="fa-solid fa-location-dot text-brand-500 mr-1.5"></i> 1st Floor, Diamond Plaza, Sector - 5, Hiran Magri, Udaipur - 313002, Rajasthan</p>
+            </div>
+            <div>
+                <h4 class="text-white text-sm font-bold uppercase tracking-wider mb-3">Direct Support</h4>
+                <p class="text-slate-300 mb-1"><i class="fa-solid fa-phone text-brand-500 mr-1.5"></i> +91 9561029349 / 9549429349</p>
+                <p class="text-slate-300"><i class="fa-solid fa-envelope text-brand-500 mr-1.5"></i> journeys.shivam@gmail.com</p>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto pt-6 border-t border-slate-900 text-center text-xs text-slate-500">
+            <p>&copy; 2026 Shivam Journeys, India. All rights reserved.</p>
+        </div>
     </footer>
 
     <!-- WhatsApp Redirect Script -->
@@ -155,10 +352,9 @@
                 return;
             }
 
-            // Replace with your business WhatsApp phone number (with country code, e.g. 919412042752)
-            const adminWhatsAppNo = "919412042752"; 
+            const adminWhatsAppNo = "919561029349"; 
 
-            const message = `Hello Shivam Journeys,%0A%0AI want to inquire about a Trek booking:%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Trek:* ${trek}%0A*Dates:* ${dates}`;
+            const message = `Hello Shivam Journeys,%0A%0AI want to book/inquire about a Trek:%0A*Name:* ${encodeURIComponent(name)}%0A*Phone:* ${encodeURIComponent(phone)}%0A*Trek:* ${encodeURIComponent(trek)}%0A*Dates:* ${encodeURIComponent(dates)}`;
 
             window.open(`https://wa.me/${adminWhatsAppNo}?text=${message}`, '_blank');
         }
