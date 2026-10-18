@@ -22,7 +22,7 @@
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased">
 
-    <!-- Header / Navigation (Admin Portal Link Removed) -->
+    <!-- Header / Navigation -->
     <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-8 py-4 flex justify-between items-center">
             <div>
@@ -44,7 +44,6 @@
 
     <!-- Hero Section with Dynamic Sliding Images -->
     <section class="relative bg-slate-950 text-white py-28 px-4 sm:px-8 overflow-hidden flex items-center justify-center min-h-[500px]">
-        <!-- Carousel Background Images -->
         <div id="hero-slider" class="absolute inset-0 z-0">
             <div class="hero-slide absolute inset-0 opacity-100 transition-opacity duration-1000">
                 <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=2000&q=80" alt="Chadar Trek" class="w-full h-full object-cover object-center scale-105">
@@ -72,9 +71,9 @@
     </section>
 
     <!-- Main Content Layout -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12">
+    <main class="max-w-7xl mx-auto px-4 sm:px-8 py-16 grid grid-cols-1 lg:grid-cols-3 gap-12 items-start">
         
-        <!-- Treks Catalog (Top 10 Treks with Exact Respective Images) -->
+        <!-- Treks Catalog -->
         <div class="lg:col-span-2 space-y-10">
             <div class="border-b pb-4 flex justify-between items-end">
                 <div>
@@ -246,11 +245,11 @@
 
         </div>
 
-        <!-- Sidebar: WhatsApp Booking & Safety Guidelines -->
-        <div class="space-y-8">
+        <!-- Sidebar: Sticky & Internally Scrollable WhatsApp Booking Form -->
+        <div class="space-y-8 sticky top-24">
             
-            <!-- WhatsApp Inquiry Form Box -->
-            <div id="inquiry-form" class="bg-white p-8 rounded-3xl shadow-xl border border-slate-200 space-y-6 sticky top-24">
+            <!-- WhatsApp Inquiry Form Box with Internal Scroll -->
+            <div id="inquiry-form" class="bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-slate-200 space-y-6 max-h-[calc(100vh-120px)] overflow-y-auto">
                 <div class="border-b pb-4">
                     <span class="text-xs font-bold text-brand-600 uppercase tracking-widest">Instant Booking</span>
                     <h3 class="text-xl font-black text-slate-900 mt-1 flex items-center gap-2">
@@ -295,26 +294,22 @@
             </div>
 
             <!-- Trekking Guidelines & Risk Advice -->
-            <div class="bg-brand-50 border border-brand-200 p-8 rounded-3xl space-y-4 text-xs text-brand-900 shadow-sm">
+            <div class="bg-brand-50 border border-brand-200 p-6 rounded-3xl space-y-3 text-xs text-brand-900 shadow-sm hidden lg:block">
                 <h4 class="font-extrabold text-sm uppercase tracking-wider text-brand-800 flex items-center gap-2">
-                    <i class="fa-solid fa-shield-halved text-brand-600 text-base"></i> Essential Guidelines & Risk Safety
+                    <i class="fa-solid fa-shield-halved text-brand-600 text-base"></i> Essential Guidelines
                 </h4>
-                <ul class="space-y-2.5 text-slate-700">
+                <ul class="space-y-2 text-slate-700">
                     <li class="flex items-start gap-2">
                         <i class="fa-solid fa-circle-check text-brand-600 mt-0.5"></i>
-                        <span><strong>Cardio Training:</strong> Begin running or endurance training at least 3-4 weeks prior.</span>
+                        <span><strong>Cardio Training:</strong> Start 3-4 weeks prior.</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <i class="fa-solid fa-circle-check text-brand-600 mt-0.5"></i>
-                        <span><strong>Hydration & AMS:</strong> Drink 3-4 liters of water daily to prevent acute mountain sickness.</span>
+                        <span><strong>Hydration:</strong> Drink 3-4 liters daily.</span>
                     </li>
                     <li class="flex items-start gap-2">
                         <i class="fa-solid fa-circle-check text-brand-600 mt-0.5"></i>
-                        <span><strong>Gear Essentials:</strong> Carry proper thermal layers, windproof jackets, and waterproof grip shoes.</span>
-                    </li>
-                    <li class="flex items-start gap-2">
-                        <i class="fa-solid fa-circle-check text-brand-600 mt-0.5"></i>
-                        <span><strong>Certified Leaders:</strong> All our expeditions include certified mountain guides and oxygen kits.</span>
+                        <span><strong>Certified Leaders:</strong> Expert guides included.</span>
                     </li>
                 </ul>
             </div>
@@ -347,9 +342,9 @@
         </div>
     </footer>
 
-    <!-- Scripts for Image Slider & WhatsApp Redirection -->
+    <!-- Scripts -->
     <script>
-        // Hero Image Slider Script
+        // Hero Image Slider
         let currentSlide = 0;
         const slides = document.querySelectorAll('.hero-slide');
         function nextSlide() {
@@ -357,9 +352,9 @@
             currentSlide = (currentSlide + 1) % slides.length;
             slides[currentSlide].style.opacity = 1;
         }
-        setInterval(nextSlide, 4000); // Change image every 4 seconds
+        setInterval(nextSlide, 4000);
 
-        // WhatsApp Inquiry Script
+        // WhatsApp Inquiry
         function sendToWhatsApp() {
             const name = document.getElementById('wa-name').value.trim();
             const phone = document.getElementById('wa-phone').value.trim();
